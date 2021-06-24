@@ -47,6 +47,7 @@ class AppHeader extends React.Component {
   }
 }
 
+
 const NavButton = ({ icon, text, url = '#', disable }) => {
 
   let iconComponent = null;
@@ -60,6 +61,8 @@ const NavButton = ({ icon, text, url = '#', disable }) => {
       break;
     case 'personal':
       iconComponent = <ProfileIcon type={disable ? 'secondary' : 'primary'} />
+      break;
+    default:
       break;
   }
 

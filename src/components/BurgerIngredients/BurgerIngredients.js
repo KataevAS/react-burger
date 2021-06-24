@@ -7,7 +7,7 @@ class BurgerIngredients extends React.Component {
 
   render() {
     return (
-      <section className={`ml-10 pl-4 pr-4`}>
+      <section className={`${styles.box} ml-10 pl-4 pr-4`}>
         <div className={`mt-25`} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           <ConstructorElement
             type="top"
@@ -16,11 +16,48 @@ class BurgerIngredients extends React.Component {
             price={200}
             thumbnail={"https://code.s3.yandex.net/react/code/bun-02.png"}
           />
-          <ConstructorElement
-            text="Краторная булка N-200i (верх)"
-            price={50}
-            thumbnail={"https://code.s3.yandex.net/react/code/bun-02.png"}
-          />
+          <div className={`${styles.scrollBox} pr-2`} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <ConstructorElement
+              text="Краторная булка N-200i (верх)"
+              price={50}
+              thumbnail={"https://code.s3.yandex.net/react/code/bun-02.png"}
+            />
+            <ConstructorElement
+              text="Краторная булка N-200i (верх)"
+              price={50}
+              thumbnail={"https://code.s3.yandex.net/react/code/bun-02.png"}
+            />
+            <ConstructorElement
+              text="Краторная булка N-200i (верх)"
+              price={50}
+              thumbnail={"https://code.s3.yandex.net/react/code/bun-02.png"}
+            />
+            <ConstructorElement
+              text="Краторная булка N-200i (верх)"
+              price={50}
+              thumbnail={"https://code.s3.yandex.net/react/code/bun-02.png"}
+            />
+            <ConstructorElement
+              text="Краторная булка N-200i (верх)"
+              price={50}
+              thumbnail={"https://code.s3.yandex.net/react/code/bun-02.png"}
+            />
+            <ConstructorElement
+              text="Краторная булка N-200i (верх)"
+              price={50}
+              thumbnail={"https://code.s3.yandex.net/react/code/bun-02.png"}
+            />
+            <ConstructorElement
+              text="Краторная булка N-200i (верх)"
+              price={50}
+              thumbnail={"https://code.s3.yandex.net/react/code/bun-02.png"}
+            />
+            <ConstructorElement
+              text="Краторная булка N-200i (верх)"
+              price={50}
+              thumbnail={"https://code.s3.yandex.net/react/code/bun-02.png"}
+            />
+          </div>
           <ConstructorElement
             type="bottom"
             isLocked={true}
@@ -29,7 +66,7 @@ class BurgerIngredients extends React.Component {
             thumbnail={"https://code.s3.yandex.net/react/code/bun-02.png"}
           />
         </div>
-        <div className={`${styles.btnBox} mt-10`}>
+        <div className={`${styles.totalPrice} mt-10`}>
           <div className={`mr-10`}>
             <span className={`text text_type_digits-medium mr-2`}>123</span>
             <CurrencyIcon type="primary" />

@@ -7,15 +7,14 @@ class BurgerConstructor extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      current: 'bun',
-      data: ''
+      current: 'bun'
     }
   }
 
-  setCurrent = (num) => {
+  setCurrent = (n) => {
     this.setState(state => ({
       ...state,
-      current: num
+      current: n
     }))
   }
 
@@ -61,7 +60,7 @@ class BurgerConstructor extends React.Component {
 
 
 const IgredientsCard = (props) => {
-  const { name, image, price } = props.ing;
+  const { name, image, price, _id } = props.ing;
 
   return (
     <div className={`${styles.ingredientsCard}`}>
