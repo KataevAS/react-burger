@@ -8,7 +8,12 @@
   justify-content: flex-end;
 }
 
-.totalPrice > svg {
+.totalPriceBox {
+  display: flex;
+  align-items: center;
+}
+
+.totalPriceBox > svg {
   width: 33px;
   height: 33px;
 }

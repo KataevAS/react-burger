@@ -25,3 +25,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.constructor-element {
+  width: 100%;
+}
+
+.constructor-element__text {
+  flex-grow: 1;
+}
