@@ -1,10 +1,11 @@
 import React from 'react'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './IngredientsCard.module.css';
+import PropTypes from 'prop-types';
 
 
 export const IngredientsCard = (props) => {
-  const { name, image, price, _id } = props.ing;
+  const { name, image, price } = props.ing;
 
   return (
     <div className={`${styles.ingredientsCard}`}>
@@ -19,3 +20,21 @@ export const IngredientsCard = (props) => {
     </div>
   )
 }
+
+
+IngredientsCard.propTypes = {
+  ing: PropTypes.shape({
+    "_id": PropTypes.string,
+    "name": PropTypes.string.isRequired,
+    "type": PropTypes.string,
+    "proteins": PropTypes.number,
+    "fat": PropTypes.number,
+    "carbohydrates": PropTypes.number,
+    "calories": PropTypes.number,
+    "price": PropTypes.number.isRequired,
+    "image": PropTypes.string,
+    "image_mobile": PropTypes.string,
+    "image_large": PropTypes.string,
+    "__v": PropTypes.number,
+  }).isRequired
+};

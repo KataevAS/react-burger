@@ -1,6 +1,7 @@
 import React from 'react'
 import { BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './NavButton.module.css';
+import PropTypes from 'prop-types';
 
 
 export const NavButton = ({ icon, text, url = '#', disable }) => {
@@ -32,3 +33,10 @@ export const NavButton = ({ icon, text, url = '#', disable }) => {
     </li>
   )
 }
+
+NavButton.propTypes = {
+  icon: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  url: PropTypes.string,
+  disable: PropTypes.bool
+};
