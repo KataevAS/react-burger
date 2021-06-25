@@ -14,14 +14,6 @@
   align-items: center;
 }
 
-.navItem:last-child {
-  margin-left: auto;
-}
-
-.navLink {
-  display: flex;
-}
-
 .logo {
   margin: 0 auto;
 }
