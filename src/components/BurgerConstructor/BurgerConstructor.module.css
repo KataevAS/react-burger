@@ -2,44 +2,30 @@
   max-width: 600px;
 }
 
-.ingredientsBox {
-  height: 75%;
-  overflow: auto;
+.totalPrice {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
-.ingredientsBox::-webkit-scrollbar {
+.totalPrice > svg {
+  width: 33px;
+  height: 33px;
+}
+
+.scrollBox {
+  overflow: auto;
+  max-height: 35vh;
+}
+
+.scrollBox::-webkit-scrollbar {
   width: 8px;
 }
-.ingredientsBox::-webkit-scrollbar-track {
+.scrollBox::-webkit-scrollbar-track {
   background: #2F2F37; 
 }
-.ingredientsBox::-webkit-scrollbar-thumb {
+.scrollBox::-webkit-scrollbar-thumb {
   background-color: #8585AD;
   border-radius: 20px;  
   border: 3px; 
-}
-
-.ingredients {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.ingredientsCard {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.ingredientsCard:nth-child(n+3) {
-  margin-top: 32px;
-}
-
-.price {
-  display: flex;
-}
-
-.cardName {
-  max-width: 250px;
-  text-align: center;
 }
