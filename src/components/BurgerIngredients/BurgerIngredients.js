@@ -1,6 +1,7 @@
 import React from 'react'
-import { CurrencyIcon, Tab } from '@ya.praktikum/react-developer-burger-ui-components'
+import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './BurgerIngredients.module.css';
+import IngredientsCard from '../IngredientsCard';
 
 
 class BurgerIngredients extends React.Component {
@@ -41,15 +42,15 @@ class BurgerIngredients extends React.Component {
         <div className={`${styles.ingredientsBox}`}>
           <h2 className={`text text_type_main-medium`}>Булки</h2>
           <article className={`${styles.ingredients} pl-4 pr-4 pt-6 pb-10`}>
-            {buns.map(item => <IgredientsCard ing={item} key={item._id} />)}
+            {buns.map(item => <IngredientsCard ing={item} key={item._id} />)}
           </article>
           <h2 className={`text text_type_main-medium`}>Соусы</h2>
           <article className={`${styles.ingredients} pl-4 pr-4 pt-6 pb-10`}>
-            {sauce.map(item => <IgredientsCard ing={item} key={item._id} />)}
+            {sauce.map(item => <IngredientsCard ing={item} key={item._id} />)}
           </article>
           <h2 className={`text text_type_main-medium`}>Начинки</h2>
           <article className={`${styles.ingredients} pl-4 pr-4 pt-6 pb-10`}>
-            {mains.map(item => <IgredientsCard ing={item} key={item._id} />)}
+            {mains.map(item => <IngredientsCard ing={item} key={item._id} />)}
           </article>
         </div>
       </section>
@@ -57,24 +58,5 @@ class BurgerIngredients extends React.Component {
     )
   }
 }
-
-
-const IgredientsCard = (props) => {
-  const { name, image, price, _id } = props.ing;
-
-  return (
-    <div className={`${styles.ingredientsCard}`}>
-      <img src={image} alt={name} className={`ml-4 mr-4`} />
-      <div className={`${styles.price} mt-1 mb-1`}>
-        <span className={`text text_type_digits-default mr-1`}>{price}</span>
-        <CurrencyIcon type="primary" />
-      </div>
-      <p className={`${styles.cardName} text text_type_main-default`}>
-        {name}
-      </p>
-    </div>
-  )
-}
-
 
 export { BurgerIngredients };

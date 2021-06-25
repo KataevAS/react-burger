@@ -24,22 +24,3 @@
   flex-wrap: wrap;
   justify-content: space-between;
 }
-
-.ingredientsCard {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.ingredientsCard:nth-child(n+3) {
-  margin-top: 32px;
-}
-
-.price {
-  display: flex;
-}
-
-.cardName {
-  max-width: 250px;
-  text-align: center;
-}
