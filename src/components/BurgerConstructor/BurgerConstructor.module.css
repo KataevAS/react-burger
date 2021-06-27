@@ -1,0 +1,36 @@
+.box {
+  max-width: 600px;
+}
+
+.totalPrice {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.totalPriceBox {
+  display: flex;
+  align-items: center;
+}
+
+.totalPriceBox > svg {
+  width: 33px;
+  height: 33px;
+}
+
+.scrollBox {
+  overflow: auto;
+  max-height: 35vh;
+}
+
+.scrollBox::-webkit-scrollbar {
+  width: 8px;
+}
+.scrollBox::-webkit-scrollbar-track {
+  background: #2F2F37; 
+}
+.scrollBox::-webkit-scrollbar-thumb {
+  background-color: #8585AD;
+  border-radius: 20px;  
+  border: 3px; 
+}

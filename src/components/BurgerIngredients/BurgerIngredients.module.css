@@ -1,0 +1,26 @@
+.box {
+  max-width: 600px;
+}
+
+.ingredientsBox {
+  height: 75%;
+  overflow: auto;
+}
+
+.ingredientsBox::-webkit-scrollbar {
+  width: 8px;
+}
+.ingredientsBox::-webkit-scrollbar-track {
+  background: #2F2F37; 
+}
+.ingredientsBox::-webkit-scrollbar-thumb {
+  background-color: #8585AD;
+  border-radius: 20px;  
+  border: 3px; 
+}
+
+.ingredients {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}

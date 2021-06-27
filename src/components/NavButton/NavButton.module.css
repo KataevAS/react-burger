@@ -1,0 +1,7 @@
+.navItem:last-child {
+  margin-left: auto;
+}
+
+.navLink {
+  display: flex;
+}
