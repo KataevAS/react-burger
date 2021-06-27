@@ -13,11 +13,9 @@ const BurgerIngredients = (props) => {
     setCurrent(name);
   }
 
-
-
-  const buns = props.ingredients.filter(item => item.type === 'bun');
-  const sauce = props.ingredients.filter(item => item.type === 'sauce');
-  const mains = props.ingredients.filter(item => item.type === 'main');
+  const buns = React.useMemo(() => props.ingredients.filter(item => item.type === 'bun'), [props.ingredients]);
+  const sauce = React.useMemo(() => props.ingredients.filter(item => item.type === 'sauce'), [props.ingredients]);
+  const mains = React.useMemo(() => props.ingredients.filter(item => item.type === 'main'), [props.ingredients]);
 
   return (
     <section className={styles.box}>
@@ -54,7 +52,7 @@ const BurgerIngredients = (props) => {
 
 
 BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({
+  ingredients: PropTypes.arrayOf(PropTypes.shape({
     "_id": PropTypes.string.isRequired,
     "name": PropTypes.string.isRequired,
     "type": PropTypes.string.isRequired,
