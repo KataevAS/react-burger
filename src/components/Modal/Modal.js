@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import ModalOverlay from '../ModalOverlay';
 
 
-export const Modal = ({ children, title, onHandleClose }) => (
-  <ModalOverlay onHandleClose={onHandleClose} >
+export const Modal = ({ children, title, onHandleClose, isOpen }) => (
+  <ModalOverlay onHandleClose={onHandleClose} isOpen={isOpen}>
     <div className={`${styles.modal} pr-10 pb-15 pl-10`}>
       {
         title
