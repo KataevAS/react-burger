@@ -24,11 +24,9 @@ const BurgerConstructor = (props) => {
     <>
       {
         modalStatus &&
-        <ModalOverlay onHandleClose={onCloseModal}>
-          <Modal onHandleClose={onCloseModal}>
-            <OrderDetails order={order} />
-          </Modal>
-        </ModalOverlay>
+        <Modal onHandleClose={onCloseModal}>
+          <OrderDetails order={order} />
+        </Modal>
       }
       <section className={`${styles.box} ml-10 pl-4 pr-4`}>
         <div className={`mt-25`} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>

@@ -24,17 +24,15 @@ export const IngredientsCard = (props) => {
     <>
       {
         modalStatus &&
-        <ModalOverlay onHandleClose={onCloseModal}>
-          <Modal onHandleClose={onCloseModal} title={'Детали ингредиента'}>
-            <IngredientDetails
-              image={image}
-              name={name}
-              calories={calories}
-              proteins={proteins}
-              carbohydrates={carbohydrates}
-              fat={fat} />
-          </Modal>
-        </ModalOverlay>
+        <Modal onHandleClose={onCloseModal} title={'Детали ингредиента'}>
+          <IngredientDetails
+            image={image}
+            name={name}
+            calories={calories}
+            proteins={proteins}
+            carbohydrates={carbohydrates}
+            fat={fat} />
+        </Modal>
       }
       <div className={styles.box} onClick={onHandleClick}>
         {__v > 0 && <Counter count={__v} />}
