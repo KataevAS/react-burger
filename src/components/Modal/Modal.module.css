@@ -8,7 +8,6 @@
 .header {
   display: flex;
   align-items: center;
-  width: 640px;
 }
 
 .title {
@@ -19,11 +18,6 @@
 .closeIcon {
   cursor: pointer;
   margin-left: auto;
-}
-
-.closeIcon > svg {
-  width: 18px;
-  height: 18px;
 }
 
 .closeIconOnly {

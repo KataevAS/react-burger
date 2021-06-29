@@ -9,7 +9,7 @@ export const Modal = ({ children, title, onHandleClose }) => (
     {
       title
         ?
-        <header className={`${styles.header} mr-10 mt-10`}>
+        <header className={`${styles.header} mt-10`}>
           <p className={`${styles.title} text text_type_main-medium`}>{title}</p>
           <div className={`${styles.closeIcon}`} onClick={onHandleClose}>
             <CloseIcon type="primary" />
