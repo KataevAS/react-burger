@@ -23,7 +23,7 @@ const BurgerConstructor = (props) => {
     <>
       {
         modalStatus &&
-        <Modal onHandleClose={onCloseModal}>
+        <Modal onHandleClose={onCloseModal} >
           <OrderDetails order={order} />
         </Modal>
       }
@@ -38,46 +38,26 @@ const BurgerConstructor = (props) => {
           />
           <div className={`${styles.scrollBox} pr-2`}>
             <ul style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <li className={`${styles.constructorElem}`}>
-                <div className={`${styles.dragIcon}`}>
-                  <DragIcon type="primary" />
-                </div>
-                <ConstructorElement
-                  text={props.ingredients[3].name}
-                  price={props.ingredients[3].price}
-                  thumbnail={props.ingredients[3].image}
-                />
-              </li>
-              <li className={`${styles.constructorElem}`}>
-                <div className={`${styles.dragIcon}`}>
-                  <DragIcon type="primary" />
-                </div>
-                <ConstructorElement
-                  text={props.ingredients[4].name}
-                  price={props.ingredients[4].price}
-                  thumbnail={props.ingredients[4].image}
-                />
-              </li>
-              <li className={`${styles.constructorElem}`}>
-                <div className={`${styles.dragIcon}`}>
-                  <DragIcon type="primary" />
-                </div>
-                <ConstructorElement
-                  text={props.ingredients[5].name}
-                  price={props.ingredients[5].price}
-                  thumbnail={props.ingredients[5].image}
-                />
-              </li>
-              <li className={`${styles.constructorElem}`}>
-                <div className={`${styles.dragIcon}`}>
-                  <DragIcon type="primary" />
-                </div>
-                <ConstructorElement
-                  text={props.ingredients[6].name}
-                  price={props.ingredients[6].price}
-                  thumbnail={props.ingredients[6].image}
-                />
-              </li>
+              {
+                props.ingredients.map((ing, index) => {
+                  if (index > 2 && index < 7) {
+                    return (
+                      <li className={`${styles.constructorElem}`} key={ing._id}>
+                        <div className={`${styles.dragIcon}`}>
+                          <DragIcon type="primary" />
+                        </div>
+                        <ConstructorElement
+                          text={ing.name}
+                          price={ing.price}
+                          thumbnail={ing.image}
+                        />
+                      </li>
+                    )
+                  } else {
+                    return false;
+                  }
+                })
+              }
             </ul>
           </div>
           <ConstructorElement
