@@ -1,0 +1,24 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.img {
+  width: 480px;
+  height: 240px;
+}
+
+.name {
+  font-size: 24px;
+  line-height: 30px;
+}
+
+.table {
+  border-collapse: separate;
+  border-spacing: 40px 5px;
+}
+
+.tableText {
+  text-align: center;
+}
