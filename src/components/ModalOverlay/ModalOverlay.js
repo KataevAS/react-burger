@@ -24,7 +24,9 @@ export const ModalOverlay = ({ children, onHandleClose }) => {
 
   useEffect(() => {
     document.addEventListener("keydown", onHandleKey, false);
-    return document.addEventListener("keydown", onHandleKey, false);
+    return () => {
+      document.removeEventListener("keydown", onHandleKey, false);
+    }
   });
 
   return ReactDOM.createPortal((
