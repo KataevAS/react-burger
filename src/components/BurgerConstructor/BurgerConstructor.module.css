@@ -34,3 +34,14 @@
   border-radius: 20px;  
   border: 3px; 
 }
+
+.constructorElem {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.dragIcon {
+  position: absolute;
+  left: -5px;
+}

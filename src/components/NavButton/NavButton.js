@@ -4,7 +4,7 @@ import styles from './NavButton.module.css';
 import PropTypes from 'prop-types';
 
 
-export const NavButton = ({ icon, text, url = '#', disable }) => {
+export const NavButton = ({ icon, text, url = '#', disable, onHandleClick }) => {
 
   let iconComponent = null;
 
@@ -24,7 +24,7 @@ export const NavButton = ({ icon, text, url = '#', disable }) => {
 
   return (
     <li className={`${styles.navItem} ${disable && 'text_color_inactive'} mt-4 mb-4 `}>
-      <a href={url} className={`${styles.navLink} pl-5 pr-5 pt-4 pb-4`}>
+      <a href={url} className={`${styles.navLink} pl-5 pr-5 pt-4 pb-4`} onClick={() => onHandleClick(icon)}>
         {iconComponent}
         <span className={`ml-2`}>
           {text}
@@ -38,5 +38,6 @@ NavButton.propTypes = {
   icon: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   url: PropTypes.string,
-  disable: PropTypes.bool
+  disable: PropTypes.bool,
+  onHandleClick: PropTypes.func
 };
