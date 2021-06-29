@@ -38,5 +38,6 @@ export const ModalOverlay = ({ children, onHandleClose, isOpen }) => {
 
 ModalOverlay.propTypes = {
   children: PropTypes.any,
-  onHandleClose: PropTypes.func.isRequired
+  onHandleClose: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired
 };
