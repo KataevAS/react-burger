@@ -1,39 +1,19 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './IngredientsCard.module.css';
 import PropTypes from 'prop-types';
-import ModalOverlay from '../ModalOverlay';
-import Modal from '../Modal';
-import IngredientDetails from '../IngredientDetails';
 
 
 export const IngredientsCard = (props) => {
   const { name, image, price, __v, calories, proteins, carbohydrates, fat } = props.ing;
 
-  const [modalStatus, setModalStatus] = useState(false);
-
-  const onCloseModal = () => {
-    setModalStatus(false);
-  }
-
   const onHandleClick = () => {
-    setModalStatus(true);
+    props.onIngredientCardClick(name, image, calories, proteins, carbohydrates, fat);
   }
+
 
   return (
     <>
-      {
-        modalStatus &&
-        <Modal onHandleClose={onCloseModal} title={'Детали ингредиента'}>
-          <IngredientDetails
-            image={image}
-            name={name}
-            calories={calories}
-            proteins={proteins}
-            carbohydrates={carbohydrates}
-            fat={fat} />
-        </Modal>
-      }
       <div className={styles.box} onClick={onHandleClick}>
         {__v > 0 && <Counter count={__v} />}
         <div className={`${styles.ingredientsCard}`}>
