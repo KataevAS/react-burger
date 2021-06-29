@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import styles from './ModalOverlay.module.css';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
@@ -14,10 +14,8 @@ export const ModalOverlay = ({ children, onHandleClose }) => {
     }
   }
 
-  const overlayRef = useRef();
-
   const onOverlayClick = (e) => {
-    if (overlayRef.current === e.target) {
+    if (e.target.classList.contains(styles.overlay)) {
       onHandleClose();
     }
   }
@@ -30,7 +28,7 @@ export const ModalOverlay = ({ children, onHandleClose }) => {
   });
 
   return ReactDOM.createPortal((
-    <div className={`${styles.overlay}`} onClick={onOverlayClick} ref={overlayRef}>
+    <div className={`${styles.overlay}`} onClick={onOverlayClick} >
       {children}
     </div>
   ),
