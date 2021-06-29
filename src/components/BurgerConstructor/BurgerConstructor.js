@@ -2,7 +2,6 @@ import { Button, ConstructorElement, CurrencyIcon, DragIcon } from '@ya.praktiku
 import React, { useState } from 'react'
 import styles from './BurgerConstructor.module.css';
 import PropTypes from 'prop-types';
-import ModalOverlay from '../ModalOverlay';
 import Modal from '../Modal';
 import OrderDetails from '../OrderDetails';
 
