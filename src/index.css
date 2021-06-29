@@ -28,6 +28,7 @@ code {
 
 .constructor-element {
   width: 100%;
+  margin-left: 20px;
 }
 
 .constructor-element__text {

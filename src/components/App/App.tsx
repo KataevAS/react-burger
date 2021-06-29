@@ -36,7 +36,7 @@ export const App = () => {
         ingredients.length > 0 &&
         <main className={styles.main}>
           <BurgerIngredients ingredients={ingredients} />
-          <BurgerConstructor />
+          <BurgerConstructor ingredients={ingredients} />
         </main>
       }
     </>
