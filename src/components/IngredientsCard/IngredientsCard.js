@@ -48,5 +48,5 @@ IngredientsCard.propTypes = {
     "image_large": PropTypes.string,
     "__v": PropTypes.number,
   }).isRequired,
-  count: PropTypes.number
+  onIngredientCardClick: PropTypes.func.isRequired
 };
