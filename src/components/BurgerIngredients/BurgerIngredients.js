@@ -1,24 +1,27 @@
-import React, { useState } from 'react'
-import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
+import React, { useContext, useState } from 'react';
+import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
+
 import styles from './BurgerIngredients.module.css';
 import IngredientsCard from '../IngredientsCard';
-import PropTypes from 'prop-types';
 import Modal from '../Modal';
 import IngredientDetails from '../IngredientDetails';
+import { IngredientsContext } from '../../services/igredientsContext';
 
 
-const BurgerIngredients = (props) => {
+const BurgerIngredients = () => {
 
   const [current, setCurrent] = useState('bun');
 
   const [modalStatus, setModalStatus] = useState(false);
   const [currentIngredient, setCurrentIngredient] = useState(null);
 
+  const { ingredients, setIngredients } = useContext(IngredientsContext);
+
   const onCloseModal = () => {
     setModalStatus(false);
   }
 
-  const onIngredientCardClick = (name, image, calories, proteins, carbohydrates, fat) => {
+  const onIngredientCardClick = (type, name, image, calories, proteins, carbohydrates, fat, _id) => {
     setCurrentIngredient({
       name,
       image,
@@ -28,15 +31,19 @@ const BurgerIngredients = (props) => {
       fat
     })
     setModalStatus(true);
+
+    type === 'bun'
+      ? setIngredients({ type: 'changeBun', id: _id })
+      : setIngredients({ type: 'incrementIngredients', id: _id })
   }
 
   const onHandleClick = (name) => {
     setCurrent(name);
   }
 
-  const buns = React.useMemo(() => props.ingredients.filter(item => item.type === 'bun'), [props.ingredients]);
-  const sauce = React.useMemo(() => props.ingredients.filter(item => item.type === 'sauce'), [props.ingredients]);
-  const mains = React.useMemo(() => props.ingredients.filter(item => item.type === 'main'), [props.ingredients]);
+  const buns = React.useMemo(() => ingredients.filter(item => item.type === 'bun'), [ingredients]);
+  const sauce = React.useMemo(() => ingredients.filter(item => item.type === 'sauce'), [ingredients]);
+  const mains = React.useMemo(() => ingredients.filter(item => item.type === 'main'), [ingredients]);
 
   return (
     <>
@@ -85,26 +92,6 @@ const BurgerIngredients = (props) => {
 
   )
 }
-
-
-BurgerIngredients.propTypes = {
-  ingredients: PropTypes.arrayOf(
-    PropTypes.shape({
-      "_id": PropTypes.string.isRequired,
-      "name": PropTypes.string.isRequired,
-      "type": PropTypes.string.isRequired,
-      "proteins": PropTypes.number,
-      "fat": PropTypes.number,
-      "carbohydrates": PropTypes.number,
-      "calories": PropTypes.number,
-      "price": PropTypes.number.isRequired,
-      "image": PropTypes.string,
-      "image_mobile": PropTypes.string,
-      "image_large": PropTypes.string,
-      "__v": PropTypes.number,
-    }).isRequired
-  ).isRequired
-};
 
 
 export { BurgerIngredients };
