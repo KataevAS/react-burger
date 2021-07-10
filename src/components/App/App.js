@@ -11,7 +11,7 @@ export const App = () => {
   const [ingredients, setIngredients] = useState([]);
 
   useEffect(() => {
-    
+
     const getData = async () => {
       try {
         const res = await fetch(URL_INGREDIENTS);
@@ -22,7 +22,7 @@ export const App = () => {
         setIngredients(data.data);
       } catch (error) {
         console.log('Возникла проблема с fetch запросом: ', error.message);
-      }      
+      }
     }
 
     getData();
