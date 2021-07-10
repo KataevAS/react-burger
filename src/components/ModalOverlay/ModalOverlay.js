@@ -1,10 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import styles from './ModalOverlay.module.css';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
-
-const modalRoot = document.getElementById('root-modals');
 
 export const ModalOverlay = ({ children, onHandleClose, isOpen }) => {
 
@@ -27,12 +24,10 @@ export const ModalOverlay = ({ children, onHandleClose, isOpen }) => {
     }
   }, [onHandleKey, isOpen]);
 
-  return ReactDOM.createPortal((
+  return (
     <div className={`${styles.overlay}`} onClick={onOverlayClick} >
       {children}
     </div>
-  ),
-    modalRoot
   )
 };
 
