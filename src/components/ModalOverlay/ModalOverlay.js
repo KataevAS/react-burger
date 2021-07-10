@@ -3,7 +3,7 @@ import styles from './ModalOverlay.module.css';
 import PropTypes from 'prop-types';
 
 
-export const ModalOverlay = ({ children, onHandleClose, isOpen }) => {
+export const ModalOverlay = ({ children, onHandleClose }) => {
 
   const onHandleKey = useCallback((e) => {
     if (e.key === 'Escape') {
@@ -22,7 +22,7 @@ export const ModalOverlay = ({ children, onHandleClose, isOpen }) => {
     return () => {
       document.removeEventListener("keydown", onHandleKey, false);
     }
-  }, [onHandleKey, isOpen]);
+  }, [onHandleKey]);
 
   return (
     <div className={`${styles.overlay}`} onClick={onOverlayClick} >
@@ -33,6 +33,5 @@ export const ModalOverlay = ({ children, onHandleClose, isOpen }) => {
 
 ModalOverlay.propTypes = {
   children: PropTypes.any,
-  onHandleClose: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool.isRequired
+  onHandleClose: PropTypes.func.isRequired
 };

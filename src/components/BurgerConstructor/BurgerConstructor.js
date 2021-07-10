@@ -23,7 +23,7 @@ const BurgerConstructor = (props) => {
     <>
       {
         modalStatus &&
-        <Modal onHandleClose={onCloseModal} isOpen={modalStatus} >
+        <Modal onHandleClose={onCloseModal} >
           <OrderDetails order={order} />
         </Modal>
       }
