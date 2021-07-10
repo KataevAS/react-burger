@@ -1,5 +1,11 @@
 .box {
   max-width: 600px;
+  width: 100%;
+}
+
+.constructor {
+  width: 100%;
+  height: 60vh;
 }
 
 .totalPrice {
@@ -20,7 +26,6 @@
 
 .scrollBox {
   overflow: auto;
-  max-height: 35vh;
 }
 
 .scrollBox::-webkit-scrollbar {
