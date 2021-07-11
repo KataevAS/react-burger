@@ -5,17 +5,17 @@ import PropTypes from 'prop-types';
 
 
 export const IngredientsCard = (props) => {
-  const { name, image, price, __v, calories, proteins, carbohydrates, fat } = props.ing;
+  const { type, name, image, price, calories, proteins, carbohydrates, fat, counter, _id } = props.ing;
 
   const onHandleClick = () => {
-    props.onIngredientCardClick(name, image, calories, proteins, carbohydrates, fat);
+    props.onIngredientCardClick(type, name, image, calories, proteins, carbohydrates, fat, _id);
   }
 
 
   return (
     <>
       <div className={styles.box} onClick={onHandleClick}>
-        {__v > 0 && <Counter count={__v} />}
+        {counter > 0 && <Counter count={counter} />}
         <div className={`${styles.ingredientsCard}`}>
           <img src={image} alt={name} className={`ml-4 mr-4`} />
           <div className={`${styles.price} mt-1 mb-1`}>
@@ -46,6 +46,7 @@ IngredientsCard.propTypes = {
     "image": PropTypes.string,
     "image_mobile": PropTypes.string,
     "image_large": PropTypes.string,
+    "conter": PropTypes.number,
     "__v": PropTypes.number,
   }).isRequired,
   onIngredientCardClick: PropTypes.func.isRequired

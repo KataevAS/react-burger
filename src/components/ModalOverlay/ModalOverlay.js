@@ -1,12 +1,9 @@
 import React, { useCallback, useEffect } from 'react';
 import styles from './ModalOverlay.module.css';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 
-const modalRoot = document.getElementById('root-modals');
-
-export const ModalOverlay = ({ children, onHandleClose, isOpen }) => {
+export const ModalOverlay = ({ children, onHandleClose }) => {
 
   const onHandleKey = useCallback((e) => {
     if (e.key === 'Escape') {
@@ -25,19 +22,16 @@ export const ModalOverlay = ({ children, onHandleClose, isOpen }) => {
     return () => {
       document.removeEventListener("keydown", onHandleKey, false);
     }
-  }, [onHandleKey, isOpen]);
+  }, [onHandleKey]);
 
-  return ReactDOM.createPortal((
+  return (
     <div className={`${styles.overlay}`} onClick={onOverlayClick} >
       {children}
     </div>
-  ),
-    modalRoot
   )
 };
 
 ModalOverlay.propTypes = {
   children: PropTypes.any,
-  onHandleClose: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool.isRequired
+  onHandleClose: PropTypes.func.isRequired
 };
