@@ -1,8 +1,10 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
+import { useDrag } from 'react-dnd';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+
 import styles from './IngredientsCard.module.css';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
 
 
 function areEqual(prevProps, nextProps) {
@@ -35,10 +37,18 @@ export const IngredientsCard = React.memo(({ type, index, name, image, price, id
     onIngredientCardClick(type, index, price, id, name, image);
   }
 
+  const [{ isDrag }, dragRef] = useDrag({
+    type: 'ingredient',
+    item: { type, price, id, name, image },
+    collect: monitor => ({
+      isDrag: monitor.isDragging()
+    })
+  });
+
 
   return (
     <>
-      <div className={styles.box} onClick={onHandleClick}>
+      <div className={styles.box} onClick={onHandleClick} ref={dragRef}>
         {counter > 0 && <Counter count={counter} />}
         <div className={`${styles.ingredientsCard}`}>
           <img src={image} alt={name} className={`ml-4 mr-4`} />

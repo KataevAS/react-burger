@@ -1,0 +1,20 @@
+.constructorElem {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.dragIcon {
+  position: absolute;
+  left: -5px;
+}
+
+.isDrag {
+  opacity: 0.5;
+}
+
+.lineDrop {
+  align-self: center;
+  width: 50%;
+  border-top: 1px solid rgb(63, 63, 63);
+}

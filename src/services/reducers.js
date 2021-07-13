@@ -7,7 +7,8 @@ import {
   SET_CURRENT_INGREDIENT,
   SET_ORDER,
   DELETE_CURRENT_INGREDIENT,
-  DELETE_CURRENT_INGREDIENTS
+  DELETE_CURRENT_INGREDIENTS,
+  CHANGE_CURRENT_ITEM_INDEX
 } from './actions';
 
 
@@ -78,6 +79,21 @@ const currentIngredients = (state = initialCurrentIngredients, action) => {
         order: action.order
       })
 
+    case CHANGE_CURRENT_ITEM_INDEX:
+      const lastId = state.all.findIndex(item => item.uniqId === action.id);
+      if ((Math.min(lastId, action.index) < 0) || (Math.max(lastId, action.index) >= state.all.length)) {
+        return state;
+      }
+      const item = state.all.splice(lastId, 1);
+      const newAll = [
+        ...state.all.slice(0, action.index),
+        item[0],
+        ...state.all.slice(action.index, state.all.length)
+      ]
+      return ({
+        ...state,
+        all: newAll
+      })
 
 
     default:

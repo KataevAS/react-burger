@@ -9,7 +9,7 @@ import IngredientDetails from '../IngredientDetails';
 import { deleteCurrentIngredient, getIngredients, setCurrentIngredient, setCurrentIngredients } from '../../services/actions';
 
 
-const BurgerIngredients = () => {
+export const BurgerIngredients = () => {
   const dispatch = useDispatch();
   const { buns, sauce, mains } = useSelector(store => store.ingredients);
 
@@ -31,7 +31,7 @@ const BurgerIngredients = () => {
     dispatch(deleteCurrentIngredient());
   }
 
-  const onIngredientCardClick = (type, index, price, id, name, image) => {
+  const onIngredientCardClick = (type, index) => {
     switch (type) {
       case 'bun':
         dispatch(setCurrentIngredient(buns[index]));
@@ -46,7 +46,6 @@ const BurgerIngredients = () => {
         break
     }
     setModalStatus(true);
-    dispatch(setCurrentIngredients(type, price, id, name, image));
   }
 
   const onHandleClick = (name) => {
@@ -142,6 +141,3 @@ const BurgerIngredients = () => {
 
   )
 }
-
-
-export { BurgerIngredients };

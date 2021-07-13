@@ -3,7 +3,8 @@ export const SET_INGREDIENTS = 'SET_INGREDIENTS',
   SET_CURRENT_INGREDIENT = 'SET_CURRENT_INGREDIENT',
   SET_ORDER = 'SET_ORDER',
   DELETE_CURRENT_INGREDIENT = 'DELETE_CURRENT_INGREDIENT',
-  DELETE_CURRENT_INGREDIENTS = 'DELETE_CURRENT_INGREDIENTS';
+  DELETE_CURRENT_INGREDIENTS = 'DELETE_CURRENT_INGREDIENTS',
+  CHANGE_CURRENT_ITEM_INDEX = 'CHANGE_CURRENT_ITEM_INDEX';
 
 
 const URL_INGREDIENTS = 'https://norma.nomoreparties.space/api/ingredients';
@@ -63,6 +64,14 @@ export const deleteCurrentIngredients = (uniqId) => dispatch => {
 }
 
 
+export const changeCurrentItemIndex = ({ id, index }) => dispatch => {
+  dispatch({
+    type: CHANGE_CURRENT_ITEM_INDEX,
+    id,
+    index
+  })
+}
+
 
 export const getOrder = (currentIngredients) => dispatch => {
 
@@ -90,3 +99,4 @@ export const getOrder = (currentIngredients) => dispatch => {
   }
   getOrderData();
 }
+

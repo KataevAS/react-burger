@@ -1,15 +1,17 @@
-import { Button, ConstructorElement, CurrencyIcon, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Button, ConstructorElement, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import React, { useState } from 'react';
 
 import styles from './BurgerConstructor.module.css';
 import Modal from '../Modal';
 import OrderDetails from '../OrderDetails';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteCurrentIngredients, getOrder } from '../../services/actions';
+import { changeCurrentItemIndex, deleteCurrentIngredients, getOrder, setCurrentIngredients } from '../../services/actions';
+import { useDrop } from 'react-dnd';
+import DraggableIngredient from '../DraggableIngredient';
 
 
 
-const BurgerConstructor = () => {
+export const BurgerConstructor = () => {
   const dispatch = useDispatch();
 
   const [modalStatus, setModalStatus] = useState(false);
@@ -35,6 +37,20 @@ const BurgerConstructor = () => {
     dispatch(deleteCurrentIngredients(uniqId));
   }
 
+  const [, dropTarget] = useDrop({
+    accept: ['ingredient', 'currentIngredient'],
+    drop(item) {
+      if (item.type === 'currentIngredient') {
+        dispatch(changeCurrentItemIndex(item));
+      } else {
+        dispatch(setCurrentIngredients(item.type, item.price, item.id, item.name, item.image));
+      }
+    },
+    // canDrop: (item) => {
+    //   return item;
+    // }
+  })
+
 
   return (
     <>
@@ -44,7 +60,7 @@ const BurgerConstructor = () => {
           <OrderDetails order={order} />
         </Modal>
       }
-      <section className={`${styles.box} ml-10 pl-4 pr-4`}>
+      <section className={`${styles.box} ml-10 pl-4 pr-4`} ref={dropTarget}>
         {
           (bun || ingredients) &&
           <>
@@ -61,19 +77,16 @@ const BurgerConstructor = () => {
               }
               <div className={`${styles.scrollBox} pr-2`}>
                 <ul style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                  {ingredients.map(ing => (
-                    <li className={`${styles.constructorElem}`} key={ing.uniqId}>
-                      <div className={`${styles.dragIcon}`}>
-                        <DragIcon type="primary" />
-                      </div>
-                      <ConstructorElement
-                        text={ing.name}
+                  {
+                    ingredients.map((ing, index) =>
+                      <DraggableIngredient
+                        key={ing.uniqId}
+                        uniqId={ing.uniqId}
+                        index={index}
+                        name={ing.name}
                         price={ing.price}
-                        thumbnail={ing.image}
-                        handleClose={() => onHandleClose(ing.uniqId)}
-                      />
-                    </li>
-                  ))
+                        image={ing.image}
+                        onHandleClose={onHandleClose} />)
                   }
                 </ul>
               </div>
@@ -107,6 +120,3 @@ const BurgerConstructor = () => {
     </>
   )
 }
-
-
-export { BurgerConstructor };
