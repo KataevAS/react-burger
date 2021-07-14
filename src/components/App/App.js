@@ -6,7 +6,7 @@ import { applyMiddleware, createStore } from 'redux';
 import { compose } from 'redux';
 import thunk from 'redux-thunk';
 
-import { rootReducer } from './services/reducers';
+import { rootReducer } from '../../services/reducers';
 import AppHeader from '../AppHeader';
 import styles from './App.module.css';
 import BurgerIngredients from '../BurgerIngredients';
