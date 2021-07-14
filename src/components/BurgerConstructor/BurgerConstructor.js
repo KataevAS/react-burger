@@ -14,6 +14,7 @@ import DraggableIngredient from '../DraggableIngredient';
 export const BurgerConstructor = () => {
   const dispatch = useDispatch();
 
+  const [dropIndex, setDropIndex] = useState(null);
   const [modalStatus, setModalStatus] = useState(false);
 
   const { bun, ingredients, order } = useSelector(store => ({
@@ -39,18 +40,19 @@ export const BurgerConstructor = () => {
 
   const [, dropTarget] = useDrop({
     accept: ['ingredient', 'currentIngredient'],
-    drop(item) {
-      if (item.type === 'currentIngredient') {
-        dispatch(changeCurrentItemIndex(item));
-      } else {
+    drop(item, monitor) {
+      if (item.type !== 'currentIngredient') {
         dispatch(setCurrentIngredients(item.type, item.price, item.id, item.name, item.image));
       }
     },
-    // canDrop: (item) => {
-    //   return item;
-    // }
+    canDrop: (item, collect) => {
+      if (item.type === 'currentIngredient' && item.index !== dropIndex && collect.isOver()) {
+        setDropIndex(item.index);
+        dispatch(changeCurrentItemIndex(item));
+      }
+      return (item)
+    }
   })
-
 
   return (
     <>

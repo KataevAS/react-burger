@@ -12,9 +12,3 @@
 .isDrag {
   opacity: 0.5;
 }
-
-.lineDrop {
-  align-self: center;
-  width: 50%;
-  border-top: 1px solid rgb(63, 63, 63);
-}

@@ -1,19 +1,20 @@
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import React, { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
+import { useDispatch } from 'react-redux';
+import { changeCurrentItemIndex } from '../../services/actions';
 
 import styles from './DraggableIngredient.module.css';
 
 
 export const DraggableIngredient = ({ uniqId, index, name, price, image, onHandleClose }) => {
+  const dispatch = useDispatch();
 
   const ref = useRef(null);
 
   const [, drop] = useDrop({
     accept: 'currentIngredient',
-
     hover(item, monitor) {
-
       if (!ref.current) {
         return;
       }
@@ -39,25 +40,30 @@ export const DraggableIngredient = ({ uniqId, index, name, price, image, onHandl
 
   const [{ isDrag }, dragRef] = useDrag({
     type: 'currentIngredient',
-    item: { id: uniqId, index: index, type: 'currentIngredient' },
+    item: { id: uniqId, index: index, type: 'currentIngredient', startId: index },
     collect: monitor => ({
       isDrag: monitor.isDragging()
-    })
+    }),
+    end: (item, monitor) => {
+      !monitor.getDropResult() && dispatch(changeCurrentItemIndex({ id: uniqId, index: item.startId }));
+    },
   });
 
   dragRef(drop(ref));
 
   return (
-    <li className={`${styles.constructorElem} ${isDrag && styles.isDrag}`} ref={ref} >
-      <div className={`${styles.dragIcon}`}>
-        <DragIcon type="primary" />
-      </div>
-      <ConstructorElement
-        text={name}
-        price={price}
-        thumbnail={image}
-        handleClose={() => onHandleClose(uniqId)} />
-    </li>
+    <>
+      <li className={`${styles.constructorElem} ${isDrag && styles.isDrag}`} ref={ref} >
+        <div className={`${styles.dragIcon}`}>
+          <DragIcon type="primary" />
+        </div>
+        <ConstructorElement
+          text={name}
+          price={price}
+          thumbnail={image}
+          handleClose={() => onHandleClose(uniqId)} />
+      </li>
+    </>
   )
 }
 
