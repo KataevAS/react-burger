@@ -2,10 +2,14 @@ import { combineReducers } from 'redux';
 import { nanoid } from 'nanoid';
 
 import {
-  SET_INGREDIENTS,
+  SET_INGREDIENTS_SUCCESS,
+  SET_INGREDIENTS_ERROR,
+  SET_INGREDIENTS_REQUEST,
   SET_CURRENT_INGREDIENTS,
   SET_CURRENT_INGREDIENT,
-  SET_ORDER,
+  SET_ORDER_SUCCESS,
+  SET_ORDER_REQUEST,
+  SET_ORDER_ERROR,
   DELETE_CURRENT_INGREDIENT,
   DELETE_CURRENT_INGREDIENTS,
   CHANGE_CURRENT_ITEM_INDEX
@@ -31,7 +35,7 @@ const ingredients = (state = initialIngredients, action) => {
   switch (action.type) {
 
 
-    case SET_INGREDIENTS:
+    case SET_INGREDIENTS_SUCCESS:
       return ({
         ...state,
         buns: action.ingredients.filter(item => item.type === 'bun'),
@@ -40,6 +44,12 @@ const ingredients = (state = initialIngredients, action) => {
         requestIngredients: false
       });
 
+    case SET_INGREDIENTS_REQUEST:
+      return (initialIngredients)
+
+
+    case SET_INGREDIENTS_ERROR:
+      return (initialIngredients)
 
     default:
       return state;
@@ -73,10 +83,22 @@ const currentIngredients = (state = initialCurrentIngredients, action) => {
         all: state.all.filter(item => item.uniqId !== action.uniqId)
       }
 
-    case SET_ORDER:
+    case SET_ORDER_SUCCESS:
       return ({
         ...state,
         order: action.order
+      })
+
+    case SET_ORDER_REQUEST:
+      return ({
+        ...state,
+        order: initialCurrentIngredients.order
+      })
+
+    case SET_ORDER_ERROR:
+      return ({
+        ...state,
+        order: initialCurrentIngredients.order
       })
 
     case CHANGE_CURRENT_ITEM_INDEX:
