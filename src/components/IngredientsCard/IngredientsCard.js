@@ -37,7 +37,7 @@ export const IngredientsCard = React.memo(({ type, index, name, image, price, id
     onIngredientCardClick(type, index, price, id, name, image);
   }
 
-  const [{ isDrag }, dragRef] = useDrag({
+  const [, dragRef] = useDrag({
     type: 'ingredient',
     item: { type, price, id, name, image },
     collect: monitor => ({
