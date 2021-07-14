@@ -2,8 +2,9 @@ import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burg
 import React, { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { useDispatch } from 'react-redux';
-import { changeCurrentItemIndex } from '../../services/actions';
+import PropTypes from 'prop-types';
 
+import { changeCurrentItemIndex } from '../../services/actions';
 import styles from './DraggableIngredient.module.css';
 
 
@@ -67,6 +68,16 @@ export const DraggableIngredient = ({ uniqId, index, name, price, image, onHandl
   )
 }
 
+
+DraggableIngredient.propTypes = {
+
+  "uniqId": PropTypes.string.isRequired,
+  "index": PropTypes.number.isRequired,
+  "name": PropTypes.string.isRequired,
+  "price": PropTypes.number.isRequired,
+  "image": PropTypes.string.isRequired,
+  "onHandleClose": PropTypes.func.isRequired
+};
 
 
 
