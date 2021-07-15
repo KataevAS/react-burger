@@ -10,7 +10,6 @@ import { useDrop } from 'react-dnd';
 import DraggableIngredient from '../DraggableIngredient';
 
 
-
 export const BurgerConstructor = () => {
   const dispatch = useDispatch();
 
@@ -40,7 +39,7 @@ export const BurgerConstructor = () => {
 
   const [, dropTarget] = useDrop({
     accept: ['ingredient', 'currentIngredient'],
-    drop(item, monitor) {
+    drop(item) {
       if (item.type !== 'currentIngredient') {
         dispatch(setCurrentIngredients(item.type, item.price, item.id, item.name, item.image));
       }
