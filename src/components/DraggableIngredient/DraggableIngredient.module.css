@@ -1,0 +1,14 @@
+.constructorElem {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.dragIcon {
+  position: absolute;
+  left: -5px;
+}
+
+.isDrag {
+  opacity: 0.5;
+}

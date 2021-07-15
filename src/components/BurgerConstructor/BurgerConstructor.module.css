@@ -3,7 +3,13 @@
   width: 100%;
 }
 
+.boxHover {
+  border: 2px solid rgb(114, 114, 114);
+  border-radius: 50px;
+}
+
 .constructor {
+  justify-content: space-between;
   width: 100%;
   height: 60vh;
 }
@@ -38,15 +44,4 @@
   background-color: #8585AD;
   border-radius: 20px;  
   border: 3px; 
-}
-
-.constructorElem {
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-
-.dragIcon {
-  position: absolute;
-  left: -5px;
 }
