@@ -1,5 +1,5 @@
 import { Button, ConstructorElement, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import styles from './BurgerConstructor.module.css';
 import Modal from '../Modal';
@@ -53,6 +53,34 @@ export const BurgerConstructor = () => {
     }
   })
 
+  const renderBunTop = useMemo(() => {
+    if (bun) {
+      return (
+        < ConstructorElement
+          type="top"
+          isLocked={true}
+          text={`${bun.name} (верх)`}
+          price={bun.price}
+          thumbnail={bun.image}
+        />
+      )
+    }
+  }, [bun?.name, bun?.price, bun?.image]);
+
+  const renderBunBot = useMemo(() => {
+    if (bun) {
+      return (
+        < ConstructorElement
+          type="top"
+          isLocked={true}
+          text={`${bun.name} (низ)}`}
+          price={bun.price}
+          thumbnail={bun.image}
+        />
+      )
+    }
+  }, [bun?.name, bun?.price, bun?.image]);
+
   return (
     <>
       {
@@ -67,14 +95,7 @@ export const BurgerConstructor = () => {
           <>
             <div className={`${styles.constructor} mt-25`} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               {
-                bun &&
-                <ConstructorElement
-                  type="top"
-                  isLocked={true}
-                  text={`${bun.name} (верх)`}
-                  price={bun.price}
-                  thumbnail={bun.image}
-                />
+                bun && renderBunTop
               }
               <div className={`${styles.scrollBox} pr-2`}>
                 <ul style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -92,14 +113,7 @@ export const BurgerConstructor = () => {
                 </ul>
               </div>
               {
-                bun &&
-                <ConstructorElement
-                  type="bottom"
-                  isLocked={true}
-                  text={`${bun.name} (низ)`}
-                  price={bun.price}
-                  thumbnail={bun.image}
-                />
+                bun && renderBunBot
               }
             </div>
             <div className={`${styles.totalPrice} mt-10`}>
