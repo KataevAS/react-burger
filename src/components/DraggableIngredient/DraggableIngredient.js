@@ -7,8 +7,18 @@ import PropTypes from 'prop-types';
 import { changeCurrentItemIndex } from '../../services/actions';
 import styles from './DraggableIngredient.module.css';
 
+function areEqual(prevProps, nextProps) {
+  return (
+    prevProps.uniqId === nextProps.uniqId &&
+    prevProps.index === nextProps.index &&
+    prevProps.name === nextProps.name &&
+    prevProps.price === nextProps.price &&
+    prevProps.image === nextProps.image
+  )
+}
 
-export const DraggableIngredient = ({ uniqId, index, name, price, image, onHandleClose }) => {
+
+export const DraggableIngredient = React.memo(({ uniqId, index, name, price, image, onHandleClose }) => {
   const dispatch = useDispatch();
 
   const ref = useRef(null);
@@ -66,7 +76,7 @@ export const DraggableIngredient = ({ uniqId, index, name, price, image, onHandl
       </li>
     </>
   )
-}
+}, areEqual)
 
 
 DraggableIngredient.propTypes = {
