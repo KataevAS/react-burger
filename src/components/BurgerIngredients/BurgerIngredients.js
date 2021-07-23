@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -58,7 +58,7 @@ export const BurgerIngredients = () => {
     dispatch(deleteCurrentIngredient());
   }
 
-  const onIngredientCardClick = (type, index) => {
+  const onIngredientCardClick = useCallback((type, index) => {
     switch (type) {
       case 'bun':
         dispatch(setCurrentIngredient(buns[index]));
@@ -73,7 +73,7 @@ export const BurgerIngredients = () => {
         break
     }
     setModalStatus(true);
-  }
+  }, [dispatch, buns, sauce, mains])
 
   const onHandleClick = (name) => {
     setCurrentTab(name);
