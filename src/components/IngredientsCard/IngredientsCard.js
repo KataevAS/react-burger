@@ -7,17 +7,6 @@ import styles from './IngredientsCard.module.css';
 import PropTypes from 'prop-types';
 
 
-function areEqual(prevProps, nextProps) {
-  return (
-    prevProps.type === nextProps.type &&
-    prevProps.index === nextProps.index &&
-    prevProps.name === nextProps.name &&
-    prevProps.image === nextProps.image &&
-    prevProps.id === nextProps.id
-  )
-}
-
-
 export const IngredientsCard = React.memo(({ type, index, name, image, price, id, onIngredientCardClick }) => {
 
   const counter = useSelector(store => {
@@ -64,7 +53,7 @@ export const IngredientsCard = React.memo(({ type, index, name, image, price, id
     </>
 
   )
-}, areEqual)
+})
 
 
 IngredientsCard.propTypes = {
