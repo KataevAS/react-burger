@@ -71,7 +71,7 @@ export const BurgerConstructor = () => {
     if (bun) {
       return (
         < ConstructorElement
-          type="top"
+          type="bottom"
           isLocked={true}
           text={`${bun.name} (низ)}`}
           price={bun.price}
