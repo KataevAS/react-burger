@@ -65,7 +65,7 @@ export const BurgerConstructor = () => {
         />
       )
     }
-  }, [bun?.name, bun?.price, bun?.image]);
+  }, [bun]);
 
   const renderBunBot = useMemo(() => {
     if (bun) {
@@ -79,7 +79,7 @@ export const BurgerConstructor = () => {
         />
       )
     }
-  }, [bun?.name, bun?.price, bun?.image]);
+  }, [bun]);
 
   return (
     <>
