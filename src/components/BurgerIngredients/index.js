@@ -1,2 +1,2 @@
 import { BurgerIngredients } from './BurgerIngredients.js'
-export default BurgerIngredients;
+export default BurgerIngredients

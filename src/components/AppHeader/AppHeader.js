@@ -1,17 +1,14 @@
 import React, { useState } from 'react'
 import { Logo } from '@ya.praktikum/react-developer-burger-ui-components'
-import styles from './AppHeader.module.css';
-import NavButton from '../NavButton';
-
+import styles from './AppHeader.module.css'
+import NavButton from '../NavButton'
 
 const AppHeader = () => {
-
-  const [currentMenu, setCurrentMenu] = useState('constructor');
+  const [currentMenu, setCurrentMenu] = useState('constructor')
 
   const onHandleClick = (name) => {
-    setCurrentMenu(name);
+    setCurrentMenu(name)
   }
-
 
   return (
     <header className={`${styles.header}`}>
@@ -50,4 +47,4 @@ const AppHeader = () => {
   )
 }
 
-export { AppHeader };
+export { AppHeader }

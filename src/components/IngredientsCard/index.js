@@ -1,2 +1,2 @@
-import { IngredientsCard } from "./IngredientsCard";
-export default IngredientsCard;
+import { IngredientsCard } from './IngredientsCard'
+export default IngredientsCard

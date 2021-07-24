@@ -1,2 +1,2 @@
-import { OrderDetails } from "./OrderDetails";
-export default OrderDetails;
+import { OrderDetails } from './OrderDetails'
+export default OrderDetails
