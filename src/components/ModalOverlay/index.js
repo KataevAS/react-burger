@@ -1,2 +1,2 @@
-import { ModalOverlay } from './ModalOverlay.js';
-export default ModalOverlay;
+import { ModalOverlay } from './ModalOverlay.js'
+export default ModalOverlay

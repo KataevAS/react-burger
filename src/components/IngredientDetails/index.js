@@ -1,2 +1,2 @@
-import { IngredientDetails } from "./IngredientDetails";
-export default IngredientDetails;
+import { IngredientDetails } from './IngredientDetails'
+export default IngredientDetails

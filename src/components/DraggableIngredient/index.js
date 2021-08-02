@@ -1,2 +1,2 @@
-import { DraggableIngredient } from "./DraggableIngredient";
-export default DraggableIngredient;
+import { DraggableIngredient } from './DraggableIngredient'
+export default DraggableIngredient
