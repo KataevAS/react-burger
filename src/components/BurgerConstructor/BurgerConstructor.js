@@ -1,5 +1,6 @@
 import { Button, ConstructorElement, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import React, { useMemo, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 
 import styles from './BurgerConstructor.module.css'
 import Modal from '../Modal'
@@ -16,10 +17,12 @@ import DraggableIngredient from '../DraggableIngredient'
 
 export const BurgerConstructor = () => {
   const dispatch = useDispatch()
+  const history = useHistory()
 
   const [dropIndex, setDropIndex] = useState(null)
   const [modalStatus, setModalStatus] = useState(false)
 
+  const isAuth = useSelector((store) => store.user.isAuth)
   const { bun, ingredients, order } = useSelector((store) => ({
     bun: store.currentIngredients.bun,
     ingredients: store.currentIngredients.all,
@@ -33,6 +36,9 @@ export const BurgerConstructor = () => {
   }
 
   const onOpenModal = () => {
+    if (!isAuth) {
+      history.push('/login')
+    }
     setModalStatus(true)
     dispatch(getOrder([bun.id, bun.id, ...ingredients.map((item) => item.id)]))
   }

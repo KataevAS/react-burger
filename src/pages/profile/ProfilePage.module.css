@@ -1,0 +1,36 @@
+.section {
+  display: flex;
+  margin-top: 120px;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  width: 480px;
+}
+
+.nav {
+  width: 320px;
+}
+
+.navItem {
+  height: 64px;
+
+  display: flex;
+  align-items: center;
+}
+
+.btnsForm {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.btnFormHide {
+  display: none;
+}
+
+.cancelBtn {
+  color: #4c4cff;
+  cursor: pointer;
+}

@@ -5,8 +5,11 @@ import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-c
 
 import styles from './IngredientsCard.module.css'
 import PropTypes from 'prop-types'
+import { useLocation, Link } from 'react-router-dom'
 
 export const IngredientsCard = React.memo(({ type, index, name, image, price, id, onIngredientCardClick }) => {
+  const location = useLocation()
+
   const counter = useSelector((store) => {
     if (type === 'bun' && store.currentIngredients.bun?.id === id) {
       return 1
@@ -19,11 +22,6 @@ export const IngredientsCard = React.memo(({ type, index, name, image, price, id
     }
   })
 
-  const onHandleClick = (e) => {
-    e.stopPropagation()
-    onIngredientCardClick(type, index, price, id, name, image)
-  }
-
   const [, dragRef] = useDrag({
     type: 'ingredient',
     item: { type, price, id, name, image },
@@ -33,8 +31,12 @@ export const IngredientsCard = React.memo(({ type, index, name, image, price, id
   })
 
   return (
-    <>
-      <div className={styles.box} onClick={onHandleClick} ref={dragRef}>
+    <div onClick={() => onIngredientCardClick(type, index)} className={styles.box} ref={dragRef}>
+      <Link
+        to={{
+          pathname: `/ingredients/${id}`,
+          state: { background: location },
+        }}>
         {counter > 0 && <Counter count={counter} />}
         <div className={`${styles.ingredientsCard}`}>
           <img src={image} alt={name} className={`ml-4 mr-4`} />
@@ -44,8 +46,8 @@ export const IngredientsCard = React.memo(({ type, index, name, image, price, id
           </div>
           <p className={`${styles.cardName} text text_type_main-default`}>{name}</p>
         </div>
-      </div>
-    </>
+      </Link>
+    </div>
   )
 })
 

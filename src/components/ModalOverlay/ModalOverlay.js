@@ -6,7 +6,7 @@ export const ModalOverlay = ({ children, onHandleClose }) => {
   const onHandleKey = useCallback(
     (e) => {
       if (e.key === 'Escape') {
-        onHandleClose()
+        onHandleClose(e)
       }
     },
     [onHandleClose]
@@ -14,7 +14,7 @@ export const ModalOverlay = ({ children, onHandleClose }) => {
 
   const onOverlayClick = (e) => {
     if (e.target.classList.contains(styles.overlay)) {
-      onHandleClose()
+      onHandleClose(e)
     }
   }
 

@@ -2,6 +2,16 @@ import { combineReducers } from 'redux'
 import { nanoid } from 'nanoid'
 
 import {
+  SET_USER,
+  REMOVE_USER,
+  SET_USER_REQUEST,
+  SET_USER_ERROR,
+  SET_SENT_EMAIL_FORGOT_PASSWORD,
+  CHANGE_USER_DATA,
+  SET_LOAD_STATUS_TRUE,
+  SET_LOAD_STATUS_FALSE,
+  SET_RESET_PASSWORD_STATUS,
+  SET_INITIAL_RESET_STATUS,
   SET_INGREDIENTS_SUCCESS,
   SET_INGREDIENTS_ERROR,
   SET_INGREDIENTS_REQUEST,
@@ -15,6 +25,13 @@ import {
   CHANGE_CURRENT_ITEM_INDEX,
 } from './actions'
 
+const initialUser = {
+  isAuth: false,
+  isSentEmail: false,
+  isResetPassword: false,
+  isLoadPatch: false,
+  userData: null,
+}
 const initialIngredients = {
   buns: [],
   sauce: [],
@@ -27,6 +44,49 @@ const initialCurrentIngredients = {
   order: null,
 }
 const initialCurrentIngredient = null
+
+const user = (state = initialUser, action) => {
+  switch (action.type) {
+    case SET_USER:
+      return { ...state, isAuth: true, userData: action.user }
+
+    case SET_SENT_EMAIL_FORGOT_PASSWORD:
+      return { ...state, isSentEmail: true }
+
+    case SET_RESET_PASSWORD_STATUS:
+      return { ...state, isResetPassword: true }
+
+    case CHANGE_USER_DATA:
+      return {
+        ...state,
+        userData: {
+          name: action.user.name ? action.user.name : state.userData.name,
+          email: action.user.email ? action.user.email : state.userData.email,
+        },
+      }
+
+    case SET_LOAD_STATUS_TRUE:
+      return { ...state, isLoadPatch: true }
+
+    case SET_LOAD_STATUS_FALSE:
+      return { ...state, isLoadPatch: false }
+
+    case SET_INITIAL_RESET_STATUS:
+      return initialUser
+
+    case REMOVE_USER:
+      return initialUser
+
+    case SET_USER_REQUEST:
+      return initialUser
+
+    case SET_USER_ERROR:
+      return initialUser
+
+    default:
+      return state
+  }
+}
 
 const ingredients = (state = initialIngredients, action) => {
   switch (action.type) {
@@ -113,7 +173,7 @@ const currentIngredient = (state = initialCurrentIngredient, action) => {
       return action.ingredient
 
     case DELETE_CURRENT_INGREDIENT:
-      return null
+      return initialCurrentIngredient
 
     default:
       return state
@@ -121,6 +181,7 @@ const currentIngredient = (state = initialCurrentIngredient, action) => {
 }
 
 export const rootReducer = combineReducers({
+  user,
   ingredients,
   currentIngredients,
   currentIngredient,
