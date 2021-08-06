@@ -34,7 +34,7 @@ export const ProfilePage = () => {
     return name !== user.name || email !== user.email || password !== '' ? true : false
   }
 
-  const onClickSave = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault()
     dispatch(changeUserData({ name, email, password }))
     setPassword('')
@@ -117,7 +117,7 @@ export const ProfilePage = () => {
               <span className={`${styles.cancelBtn} mr-6 text text_type_main-default`} onClick={onClickCancel}>
                 Отменить
               </span>
-              <Button onClick={onClickSave}>Сохранить</Button>
+              <Button onSubmit={onSubmit}>Сохранить</Button>
             </div>
           </form>
         </Route>
