@@ -67,7 +67,7 @@ export const ProfilePage = () => {
 
       <Switch>
         <Route path='/profile' exact>
-          <form className={`${styles.box} ml-15`}>
+          <form className={`${styles.box} ml-15`} onSubmit={onSubmit}>
             <div className={`${stylesForm.input}`}>
               <Input
                 type={'text'}

@@ -34,7 +34,7 @@ export const LoginPage = () => {
     return <Redirect to={state?.from || '/'} />
   }
   return (
-    <form className={styles.box}>
+    <form className={styles.box} onSubmit={onSubmit}>
       <h1 className='text text_type_main-medium'>Вход</h1>
       <div className={`${styles.input} mt-6`}>
         <Input

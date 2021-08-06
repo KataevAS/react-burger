@@ -26,7 +26,7 @@ export const ResetPasswordPage = () => {
   }
 
   return (
-    <form className={styles.box}>
+    <form className={styles.box} onSubmit={onSubmit}>
       <h1 className='text text_type_main-medium'>Восстановление пароля</h1>
       <div className={`${styles.input} mt-6`}>
         <Input
