@@ -16,7 +16,8 @@ export const ResetPasswordPage = () => {
   const [password, setPassword] = useState('')
   const [token, setToken] = useState('')
 
-  const onClick = () => {
+  const onSubmit = (e) => {
+    e.preventDefault()
     dispatch(resetPassword(password, token))
   }
 
@@ -25,7 +26,7 @@ export const ResetPasswordPage = () => {
   }
 
   return (
-    <section className={styles.box}>
+    <form className={styles.box}>
       <h1 className='text text_type_main-medium'>Восстановление пароля</h1>
       <div className={`${styles.input} mt-6`}>
         <Input
@@ -35,10 +36,10 @@ export const ResetPasswordPage = () => {
           icon={'ShowIcon'}
           value={password}
           name='password'
-        // error={false}
-        // ref={inputRef}
-        // onIconClick={onIconClick}
-        // errorText={'Ошибка'}
+          // error={false}
+          // ref={inputRef}
+          // onIconClick={onIconClick}
+          // errorText={'Ошибка'}
         />
       </div>
       <div className={`${styles.input} mt-6`}>
@@ -49,14 +50,14 @@ export const ResetPasswordPage = () => {
           icon={'undefined'}
           value={token}
           name='token'
-        // error={false}
-        // ref={inputRef}
-        // onIconClick={onIconClick}
-        // errorText={'Ошибка'}
+          // error={false}
+          // ref={inputRef}
+          // onIconClick={onIconClick}
+          // errorText={'Ошибка'}
         />
       </div>
       <div className={`mt-6`}>
-        <Button onClick={onClick}>Сохранить</Button>
+        <Button onSubmit={onSubmit}>Сохранить</Button>
       </div>
       <p className='text text_type_main-default text_color_inactive mt-20'>
         Вспомнили пароль?{' '}
@@ -64,6 +65,6 @@ export const ResetPasswordPage = () => {
           Войти
         </Link>
       </p>
-    </section>
+    </form>
   )
 }
