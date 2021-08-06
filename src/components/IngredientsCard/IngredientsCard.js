@@ -12,7 +12,7 @@ export const IngredientsCard = React.memo(({ type, index, name, image, price, id
 
   const counter = useSelector((store) => {
     if (type === 'bun' && store.currentIngredients.bun?.id === id) {
-      return 1
+      return 2
     } else {
       let count = 0
       store.currentIngredients.all.forEach((item) => {
