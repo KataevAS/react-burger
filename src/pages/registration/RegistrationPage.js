@@ -24,7 +24,8 @@ export const RegistrationPage = () => {
     setUserForm((state) => ({ ...state, [e.target.name]: e.target.value }))
   }
 
-  const onBtnClick = () => {
+  const onSubmit = (e) => {
+    e.preventDefault()
     dispatch(registration(userForm))
   }
 
@@ -33,7 +34,7 @@ export const RegistrationPage = () => {
   }
 
   return (
-    <section className={styles.box}>
+    <form className={styles.box}>
       <h1 className='text text_type_main-medium'>Регистрация</h1>
       <div className={`${styles.input} mt-6`}>
         <Input
@@ -43,10 +44,10 @@ export const RegistrationPage = () => {
           icon={'undefined'}
           value={userForm.name}
           name={'name'}
-        // error={false}
-        // ref={inputRef}
-        // onIconClick={onIconClick}
-        // errorText={'Ошибка'}
+          // error={false}
+          // ref={inputRef}
+          // onIconClick={onIconClick}
+          // errorText={'Ошибка'}
         />
       </div>
       <div className={`${styles.input} mt-6`}>
@@ -57,17 +58,17 @@ export const RegistrationPage = () => {
           icon={'undefined'}
           value={userForm.email}
           name={'email'}
-        // error={false}
-        // ref={inputRef}
-        // onIconClick={onIconClick}
-        // errorText={'Ошибка'}
+          // error={false}
+          // ref={inputRef}
+          // onIconClick={onIconClick}
+          // errorText={'Ошибка'}
         />
       </div>
       <div className={`${styles.input} mt-6`}>
         <PasswordInput name='password' onChange={onChange} value={userForm.password} />
       </div>
       <div className={`mt-6`}>
-        <Button onClick={onBtnClick}>Зарегистрироваться</Button>
+        <Button onSubmit={onSubmit}>Зарегистрироваться</Button>
       </div>
       <p className='text text_type_main-default text_color_inactive mt-20'>
         Уже зарегистрированы?{' '}
@@ -75,6 +76,6 @@ export const RegistrationPage = () => {
           Войти
         </Link>
       </p>
-    </section>
+    </form>
   )
 }
