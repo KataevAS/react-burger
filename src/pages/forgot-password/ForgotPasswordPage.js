@@ -24,7 +24,8 @@ export const ForgotPasswordPage = () => {
     setEmail(e.target.value)
   }
 
-  const onBtnClick = () => {
+  const onSubmit = (e) => {
+    e.preventDefault()
     dispatch(setForgotEmail(email))
   }
 
@@ -37,7 +38,7 @@ export const ForgotPasswordPage = () => {
   }
 
   return (
-    <section className={styles.box}>
+    <form className={styles.box}>
       <h1 className='text text_type_main-medium'>Восстановление пароля</h1>
       <div className={`${styles.input} mt-6`}>
         <Input
@@ -47,14 +48,14 @@ export const ForgotPasswordPage = () => {
           icon={'undefined'}
           value={email}
           name='email'
-        // error={false}
-        // ref={inputRef}
-        // onIconClick={onIconClick}
-        // errorText={'Ошибка'}
+          // error={false}
+          // ref={inputRef}
+          // onIconClick={onIconClick}
+          // errorText={'Ошибка'}
         />
       </div>
       <div className={`mt-6`}>
-        <Button onClick={onBtnClick}>Восстановить</Button>
+        <Button onSubmit={onSubmit}>Восстановить</Button>
       </div>
       <p className='text text_type_main-default text_color_inactive mt-20'>
         Вспомнили пароль?{' '}
@@ -62,6 +63,6 @@ export const ForgotPasswordPage = () => {
           Войти
         </Link>
       </p>
-    </section>
+    </form>
   )
 }
