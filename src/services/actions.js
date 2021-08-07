@@ -220,10 +220,10 @@ export const logout = () => (dispatch) => {
       const data = await res.json()
       if (data.success) {
         clearCookie()
+        dispatch({
+          type: REMOVE_USER,
+        })
       }
-      dispatch({
-        type: REMOVE_USER,
-      })
     } catch (error) {
       console.log('Возникла проблема с fetch запросом: ', error.message)
     }
