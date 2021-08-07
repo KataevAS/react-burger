@@ -23,9 +23,9 @@ const AppHeader = () => {
           {
             <NavButton
               icon='tape'
-              url='/profile/orders'
+              url='/feed'
               text='Лента заказов'
-              disable={!pathname.startsWith('/profile/orders')}
+              disable={!pathname.startsWith('/feed')}
             />
           }
 
