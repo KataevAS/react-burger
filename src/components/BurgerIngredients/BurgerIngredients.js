@@ -4,21 +4,14 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 
 import styles from './BurgerIngredients.module.css'
 import IngredientsCard from '../IngredientsCard'
-import Modal from '../Modal'
-import IngredientDetails from '../IngredientDetails'
-import {
-  deleteCurrentIngredient,
-  getIngredients,
-  setCurrentIngredient,
-  setCurrentIngredients,
-} from '../../services/actions'
+import { getIngredients, setCurrentIngredient, setCurrentIngredients } from '../../services/actions'
 
 export const BurgerIngredients = () => {
   const dispatch = useDispatch()
+
   const { buns, sauce, mains } = useSelector((store) => store.ingredients)
 
   const [currentTab, setCurrentTab] = useState('bun')
-  const [modalStatus, setModalStatus] = useState(false)
   const refTabs = useRef(null)
   const refTitleBuns = useRef(null)
   const refSauceBuns = useRef(null)
@@ -57,11 +50,6 @@ export const BurgerIngredients = () => {
       dispatch(setCurrentIngredients(buns[0].type, buns[0].price, buns[0]._id, buns[0].name, buns[0].image))
   }, [dispatch, buns])
 
-  const onCloseModal = () => {
-    setModalStatus(false)
-    dispatch(deleteCurrentIngredient())
-  }
-
   const onIngredientCardClick = useCallback(
     (type, index) => {
       switch (type) {
@@ -77,7 +65,6 @@ export const BurgerIngredients = () => {
         default:
           break
       }
-      setModalStatus(true)
     },
     [dispatch, buns, sauce, mains]
   )
@@ -88,11 +75,6 @@ export const BurgerIngredients = () => {
 
   return (
     <>
-      {modalStatus && (
-        <Modal onHandleClose={onCloseModal} title={'Детали ингредиента'}>
-          <IngredientDetails />
-        </Modal>
-      )}
       <section className={styles.box}>
         <h1 className={`text text_type_main-large mt-10 mb-5`}>Соберите бургер</h1>
 

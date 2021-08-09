@@ -1,14 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Logo } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './AppHeader.module.css'
 import NavButton from '../NavButton'
+import { Link, useLocation } from 'react-router-dom'
 
 const AppHeader = () => {
-  const [currentMenu, setCurrentMenu] = useState('constructor')
-
-  const onHandleClick = (name) => {
-    setCurrentMenu(name)
-  }
+  const { pathname } = useLocation()
 
   return (
     <header className={`${styles.header}`}>
@@ -17,28 +14,33 @@ const AppHeader = () => {
           {
             <NavButton
               icon='constructor'
-              text='Конструктор'
-              disable={currentMenu !== 'constructor'}
-              onHandleClick={onHandleClick}
-            />
+              url='/'
+              disable={pathname !== '/'}
+              text='Конструктор'>
+              <span className='ml-12'>Конструктор</span>
+            </NavButton>
           }
           {
             <NavButton
               icon='tape'
+              url='/feed'
               text='Лента заказов'
-              disable={currentMenu !== 'tape'}
-              onHandleClick={onHandleClick}
+              disable={!pathname.startsWith('/feed')}
             />
           }
+
           <div className={styles.logo}>
-            <Logo />
+            <Link to='/'>
+              <Logo />
+            </Link>
           </div>
+
           {
             <NavButton
               icon='personal'
+              url='/profile'
               text='Личный кабинет'
-              disable={currentMenu !== 'personal'}
-              onHandleClick={onHandleClick}
+              disable={pathname !== '/profile'}
             />
           }
         </ul>

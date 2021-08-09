@@ -34,3 +34,11 @@ code {
 .constructor-element__text {
   flex-grow: 1;
 }
+
+div .input__container {
+  width: initial;
+}
+
+.input__container .input_size_default {
+  width: initial;
+}
