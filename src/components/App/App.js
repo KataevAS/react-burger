@@ -77,7 +77,7 @@ const AppWrapper = () => {
         <Route path='/reset-password' exact>
           <ResetPasswordPage />
         </Route>
-        <Route path='/feed' exact>
+        <Route path='/feed/:id?' exact>
           <FeedPage />
         </Route>
         <ProtectedRoute path='/profile'>
