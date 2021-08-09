@@ -121,7 +121,7 @@ export const ProfilePage = () => {
             </div>
           </form>
         </Route>
-        <Route path='/profile/orders' exact>
+        <Route path='/profile/orders/:id?' exact>
           <div>Orders</div>
         </Route>
       </Switch>
