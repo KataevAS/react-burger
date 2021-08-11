@@ -1,0 +1,25 @@
+.ordersFeedOnline {
+  flex-grow: 1;
+}
+
+.orders {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ordersItem {
+  width: 100%;
+}
+
+.ordersItemReady {
+  color: #00cccc;
+}
+
+.readyOrdersTitle {
+  color: #fff;
+}
+
+.total {
+  box-sizing: border-box;
+  text-shadow: #3333ff80 0 0 10px, #3333ff80 0 0 30px;
+}
