@@ -1,0 +1,12 @@
+.feed {
+  display: flex;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  margin-top: 40px;
+}
