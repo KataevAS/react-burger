@@ -1,0 +1,38 @@
+.OrderInfo {
+  width: fit-content;
+}
+
+.titleForPage {
+  text-align: center;
+}
+
+.statusText {
+  color: #00CCCC;
+}
+
+.cards {
+  overflow: auto;
+  max-height: 310px;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+}
+
+.card:last-child {
+  margin-bottom: 0;
+}
+
+.cardImg {
+  composes: preview from '../../utils/styles/images.module.css';
+}
+
+.price {
+  display: flex;
+  margin-left: auto;
+}
+
+.totalPrice {
+  display: flex;
+}
