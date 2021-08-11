@@ -1,0 +1,16 @@
+.preview {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 100%;
+
+  box-sizing: border-box;
+  border: 2px solid transparent;
+  background-image: linear-gradient(rgb(0, 0, 0), rgb(0, 0, 0)), linear-gradient(63.18deg, #801ab3 0%, #4c4cff 100%);
+  background-clip: content-box, border-box;
+
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
