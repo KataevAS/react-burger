@@ -1,0 +1,10 @@
+.orderFeed {
+  flex-grow: 1;
+}
+
+.cards {
+  margin-top: 20px;
+  max-height: 75vh;
+  overflow: auto;
+  border-radius: 40px;
+}
