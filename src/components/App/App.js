@@ -20,6 +20,7 @@ import { ProtectedRoute } from '../ProtectedRoute'
 import HomePage from '../../pages/home'
 import IngredientDetails from '../IngredientDetails'
 import Modal from '../Modal'
+import OrderInfo from '../OrderInfo'
 
 const composeEnhancers =
   typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -83,16 +84,31 @@ const AppWrapper = () => {
         <ProtectedRoute path='/profile'>
           <ProfilePage />
         </ProtectedRoute>
+        <ProtectedRoute path='/profile'>
+          <OrderInfo type='page' />
+        </ProtectedRoute>
         <Route path='/ingredients/:id'>
           <IngredientsPage />
         </Route>
       </Switch>
       {background && (
-        <Route path='/ingredients/:id'>
-          <Modal title={'Детали ингредиента'} onHandleClose={closeModal}>
-            <IngredientDetails />
-          </Modal>
-        </Route>
+        <Switch>
+          <Route path='/ingredients/:id'>
+            <Modal title={'Детали ингредиента'} onHandleClose={closeModal}>
+              <IngredientDetails />
+            </Modal>
+          </Route>
+          <Route path='/feed/:id'>
+            <Modal onHandleClose={closeModal}>
+              <OrderInfo type='modal' />
+            </Modal>
+          </Route>
+          <Route path='/profile/orders/:id'>
+            <Modal title={'Детали ингредиента'} onHandleClose={closeModal}>
+              <OrderInfo type='modal' />
+            </Modal>
+          </Route>
+        </Switch>
       )}
     </>
   )
