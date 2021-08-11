@@ -6,9 +6,11 @@ import styleContainer from '../../utils/styles/container.module.css'
 import styles from './ProfilePage.module.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { changeUserData, logout } from '../../services/actions'
+import OrderCard from '../../components/OrderCard'
 
 export const ProfilePage = () => {
-  const { pathname } = useLocation()
+  const location = useLocation()
+  const { pathname } = location
   const dispatch = useDispatch()
 
   const { user, isLoadPatch } = useSelector((store) => ({
@@ -60,9 +62,11 @@ export const ProfilePage = () => {
             <Link to={'/login'}>Выход</Link>
           </li>
         </ul>
-        <p className={`text text_type_main-default text_color_inactive mt-20`}>
-          В этом разделе вы можете изменить свои персональные данные
-        </p>
+        {pathname === '/profile' && (
+          <p className={`text text_type_main-default text_color_inactive mt-20`}>
+            В этом разделе вы можете изменить свои персональные данные
+          </p>
+        )}
       </nav>
 
       <Switch>
@@ -121,8 +125,90 @@ export const ProfilePage = () => {
             </div>
           </form>
         </Route>
-        <Route path='/profile/orders/:id?' exact>
-          <div>Orders</div>
+        <Route path='/profile/orders' exact>
+          <div className={`${styles.orders} ml-15 pr-2`}>
+            <Link
+              to={{
+                pathname: `/feed/${123}`,
+                state: { background: location },
+              }}>
+              <OrderCard
+                status='Готовится'
+                orderNumber='#034535'
+                name='Death Star Starship Main бургер'
+                ingredients={[
+                  'https://code.s3.yandex.net/react/code/bun-01.png',
+                  'https://code.s3.yandex.net/react/code/bun-01.png',
+                  'https://code.s3.yandex.net/react/code/bun-01.png',
+                  'https://code.s3.yandex.net/react/code/bun-01.png',
+                  'https://code.s3.yandex.net/react/code/bun-01.png',
+                  'https://code.s3.yandex.net/react/code/bun-01.png',
+                  'https://code.s3.yandex.net/react/code/bun-01.png',
+                ]}
+                createdAt='2021-06-23T14:43:22.587Z'
+              />
+            </Link>
+            <OrderCard
+              status='Готовится'
+              orderNumber='#034535'
+              name='Death Star Starship Main бургер'
+              ingredients={[
+                'https://code.s3.yandex.net/react/code/bun-01.png',
+                'https://code.s3.yandex.net/react/code/bun-01.png',
+                'https://code.s3.yandex.net/react/code/bun-01.png',
+                'https://code.s3.yandex.net/react/code/bun-01.png',
+                'https://code.s3.yandex.net/react/code/bun-01.png',
+                'https://code.s3.yandex.net/react/code/bun-01.png',
+                'https://code.s3.yandex.net/react/code/bun-01.png',
+              ]}
+              createdAt='2021-06-23T14:43:22.587Z'
+            />
+            <OrderCard
+              status='Готовится'
+              orderNumber='#034535'
+              name='Death Star Starship Main бургер'
+              ingredients={[
+                'https://code.s3.yandex.net/react/code/bun-01.png',
+                'https://code.s3.yandex.net/react/code/bun-01.png',
+                'https://code.s3.yandex.net/react/code/bun-01.png',
+                'https://code.s3.yandex.net/react/code/bun-01.png',
+                'https://code.s3.yandex.net/react/code/bun-01.png',
+                'https://code.s3.yandex.net/react/code/bun-01.png',
+                'https://code.s3.yandex.net/react/code/bun-01.png',
+              ]}
+              createdAt='2021-06-23T14:43:22.587Z'
+            />
+            <OrderCard
+              status='Готовится'
+              orderNumber='#034535'
+              name='Death Star Starship Main бургер'
+              ingredients={[
+                'https://code.s3.yandex.net/react/code/bun-01.png',
+                'https://code.s3.yandex.net/react/code/bun-01.png',
+                'https://code.s3.yandex.net/react/code/bun-01.png',
+                'https://code.s3.yandex.net/react/code/bun-01.png',
+                'https://code.s3.yandex.net/react/code/bun-01.png',
+                'https://code.s3.yandex.net/react/code/bun-01.png',
+                'https://code.s3.yandex.net/react/code/bun-01.png',
+              ]}
+              createdAt='2021-06-23T14:43:22.587Z'
+            />
+            <OrderCard
+              status='Готовится'
+              orderNumber='#034535'
+              name='Death Star Starship Main бургер'
+              ingredients={[
+                'https://code.s3.yandex.net/react/code/bun-01.png',
+                'https://code.s3.yandex.net/react/code/bun-01.png',
+                'https://code.s3.yandex.net/react/code/bun-01.png',
+                'https://code.s3.yandex.net/react/code/bun-01.png',
+                'https://code.s3.yandex.net/react/code/bun-01.png',
+                'https://code.s3.yandex.net/react/code/bun-01.png',
+                'https://code.s3.yandex.net/react/code/bun-01.png',
+              ]}
+              createdAt='2021-06-23T14:43:22.587Z'
+            />
+          </div>
         </Route>
       </Switch>
     </section>

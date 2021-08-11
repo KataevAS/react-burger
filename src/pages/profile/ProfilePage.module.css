@@ -34,3 +34,11 @@
   color: #4c4cff;
   cursor: pointer;
 }
+
+.orders {
+  box-sizing: border-box;
+  border-radius: 40px;
+  max-height: 70vh;
+  width: 100%;
+  overflow: auto;
+}
