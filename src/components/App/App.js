@@ -1,13 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
-import { Provider } from 'react-redux'
-import { applyMiddleware, createStore } from 'redux'
-import { compose } from 'redux'
-import thunk from 'redux-thunk'
+import { Provider, useDispatch } from 'react-redux'
 import { BrowserRouter as Router, Route, Switch, useLocation, useHistory } from 'react-router-dom'
 
-import { rootReducer } from '../../services/reducers'
 import AppHeader from '../AppHeader'
 import LoginPage from '../../pages/login/'
 import RegistrationPage from '../../pages/registration/'
@@ -21,20 +17,13 @@ import HomePage from '../../pages/home'
 import IngredientDetails from '../IngredientDetails'
 import Modal from '../Modal'
 import OrderInfo from '../OrderInfo'
-
-const composeEnhancers =
-  typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
-    : compose
-
-const enhancer = composeEnhancers(applyMiddleware(thunk))
-
-const store = createStore(rootReducer, enhancer)
+import { initStore } from '../../services/redux/store'
+import { getIngredients, wsConnect, wsConnectionClosed } from '../../services/redux/actions'
 
 export const App = () => {
   return (
     <>
-      <Provider store={store}>
+      <Provider store={initStore()}>
         <Router>
           <AppWrapper />
         </Router>
@@ -46,11 +35,19 @@ export const App = () => {
 const AppWrapper = () => {
   const location = useLocation()
   const history = useHistory()
+  const dispatch = useDispatch()
+
   let background
 
   if (history.action === 'PUSH') {
     background = location.state && location.state.background
   }
+
+  useEffect(() => {
+    dispatch(wsConnect())
+    dispatch(getIngredients())
+    return () => dispatch(wsConnectionClosed())
+  }, [dispatch])
 
   const closeModal = (e) => {
     e.preventDefault()
@@ -103,11 +100,11 @@ const AppWrapper = () => {
               <OrderInfo type='modal' />
             </Modal>
           </Route>
-          <Route path='/profile/orders/:id'>
-            <Modal title={'Детали ингредиента'} onHandleClose={closeModal}>
+          <ProtectedRoute path='/profile/orders/:id'>
+            <Modal onHandleClose={closeModal}>
               <OrderInfo type='modal' />
             </Modal>
-          </Route>
+          </ProtectedRoute>
         </Switch>
       )}
     </>
