@@ -4,7 +4,7 @@ import NumbersOrderFeed from '../../components/NumbersOrderFeed'
 import styleContainer from '../../utils/styles/container.module.css'
 import styles from './FeedPage.module.css'
 
-import { BrowserRouter as Router, Route, Switch, useLocation, useHistory } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import OrderInfo from '../../components/OrderInfo'
 
 export const FeedPage = () => {

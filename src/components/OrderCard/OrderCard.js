@@ -1,16 +1,16 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { formatDate } from '../../utils/functions/formatDate'
 import styles from './OrderCard.module.css'
 
-export const OrderCard = ({ orderNumber, name, ingredients, createdAt, status }) => {
-  const reFormatDate = useCallback(formatDate(createdAt), [createdAt])
+export const OrderCard = React.memo(({ orderNumber, name, ingredients, createdAt, status, price }) => {
+  const date = formatDate(createdAt)
 
   return (
     <div className={`${styles.card} p-6 mt-4`}>
       <h3 className={`${styles.orderInfo} text text_type_digits-default`}>
         {orderNumber}
-        <span className={`text_type_main-default text_color_inactive`}>{reFormatDate}</span>
+        <span className={`text_type_main-default text_color_inactive`}>{date}</span>
       </h3>
       <h2 className={`text text_type_main-medium mt-6`}>{name}</h2>
       {status && <p className={`text text_type_main-default mt-2`}>{status}</p>}
@@ -34,10 +34,10 @@ export const OrderCard = ({ orderNumber, name, ingredients, createdAt, status })
           )}
         </div>
         <div className={`${styles.totalPrice} text text_type_digits-default`}>
-          <span className={`mr-2`}>480</span>
+          <span className={`mr-2`}>{price}</span>
           <CurrencyIcon type='primary' />
         </div>
       </div>
     </div>
   )
-}
+})

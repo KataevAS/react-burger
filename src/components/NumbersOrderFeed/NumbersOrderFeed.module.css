@@ -2,6 +2,10 @@
   flex-grow: 1;
 }
 
+.ordersWindow {
+  width: 100%;
+}
+
 .orders {
   display: flex;
   justify-content: space-between;
@@ -9,14 +13,20 @@
 
 .ordersItem {
   width: 100%;
+  max-height: 325px;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.orderItem {
+  margin-right: 70px;
 }
 
 .ordersItemReady {
   color: #00cccc;
-}
-
-.readyOrdersTitle {
-  color: #fff;
 }
 
 .total {

@@ -1,12 +1,13 @@
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components'
-import React, { useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { Switch, Route, Link, useLocation } from 'react-router-dom'
 import stylesForm from '../../utils/styles/forms.module.css'
 import styleContainer from '../../utils/styles/container.module.css'
 import styles from './ProfilePage.module.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { changeUserData, logout } from '../../services/actions'
+import { changeUserData, logout, wsConnectionClosed, wsIsAuthConnect } from '../../services/redux/actions'
 import OrderCard from '../../components/OrderCard'
+import OrderInfo from '../../components/OrderInfo'
 
 export const ProfilePage = () => {
   const location = useLocation()
@@ -18,9 +19,39 @@ export const ProfilePage = () => {
     isLoadPatch: store.user.isLoadPatch,
   }))
 
+  const orders = useSelector((store) => store.onlineOrders.orders)
+
+  const buns = useSelector((store) => store.ingredients.buns)
+  const sauce = useSelector((store) => store.ingredients.sauce)
+  const mains = useSelector((store) => store.ingredients.mains)
+
+  const ingredients = useMemo(() => [...buns, ...sauce, ...mains], [buns, sauce, mains])
+
   const [name, setName] = useState(user.name)
   const [email, setEmail] = useState(user.email)
   const [password, setPassword] = useState('')
+
+  useEffect(() => {
+    dispatch(wsIsAuthConnect())
+    return () => wsConnectionClosed()
+  }, [dispatch])
+
+  const getPriceOrder = useCallback(
+    (ingredientsId) => {
+      return ingredientsId.reduce((acc, item) => {
+        const ing = ingredients.find((ing) => ing._id === item)
+        const price = ing.type === 'bun' ? ing.price * 2 : ing.price
+        acc += price
+        return acc
+      }, 0)
+    },
+    [ingredients]
+  )
+
+  const images = ingredients.reduce((acc, item) => {
+    acc[item._id] = item.image
+    return acc
+  }, {})
 
   const onClickCancel = () => {
     setName(user.name)
@@ -43,174 +74,119 @@ export const ProfilePage = () => {
   }
 
   return (
-    <section className={styleContainer.container + ' ' + styles.section}>
-      <nav className={styles.nav}>
-        <ul>
-          <li
-            className={`${styles.navItem} text text_type_main-medium ${
-              !(pathname === '/profile') && 'text_color_inactive'
-            }`}>
-            <Link to={'/profile'}>Профиль</Link>
-          </li>
-          <li
-            className={`${styles.navItem} text text_type_main-medium ${
-              !(pathname === '/profile/orders') && 'text_color_inactive'
-            }`}>
-            <Link to={'/profile/orders'}>История заказов</Link>
-          </li>
-          <li className={`${styles.navItem} text text_type_main-medium text_color_inactive`} onClick={onClickOut}>
-            <Link to={'/login'}>Выход</Link>
-          </li>
-        </ul>
-        {pathname === '/profile' && (
-          <p className={`text text_type_main-default text_color_inactive mt-20`}>
-            В этом разделе вы можете изменить свои персональные данные
-          </p>
-        )}
-      </nav>
+    <Switch>
+      <Route path='/profile/orders/:id' exact>
+        <main className={styles.orderInfo}>
+          <OrderInfo type='page' />
+        </main>
+      </Route>
+      <Route path='/profile'>
+        <main className={styleContainer.container + ' ' + styles.section}>
+          <nav className={styles.nav}>
+            <ul>
+              <li
+                className={`${styles.navItem} text text_type_main-medium ${
+                  !(pathname === '/profile') && 'text_color_inactive'
+                }`}>
+                <Link to={'/profile'}>Профиль</Link>
+              </li>
+              <li
+                className={`${styles.navItem} text text_type_main-medium ${
+                  !(pathname === '/profile/orders') && 'text_color_inactive'
+                }`}>
+                <Link to={'/profile/orders'}>История заказов</Link>
+              </li>
+              <li className={`${styles.navItem} text text_type_main-medium text_color_inactive`} onClick={onClickOut}>
+                <Link to={'/login'}>Выход</Link>
+              </li>
+            </ul>
+            {pathname === '/profile' && (
+              <p className={`text text_type_main-default text_color_inactive mt-20`}>
+                В этом разделе вы можете изменить свои персональные данные
+              </p>
+            )}
+          </nav>
 
-      <Switch>
-        <Route path='/profile' exact>
-          <form className={`${styles.box} ml-15`} onSubmit={onSubmit}>
-            <div className={`${stylesForm.input}`}>
-              <Input
-                type={'text'}
-                placeholder={'Имя'}
-                onChange={(e) => setName(e.target.value)}
-                icon={'undefined'}
-                value={name}
-                name='name'
-                dispatch={isLoadPatch}
-                // error={false}
-                // ref={inputRef}
-                // onIconClick={onIconClick}
-                // errorText={'Ошибка'}
-              />
-            </div>
-            <div className={`${stylesForm.input} mt-6`}>
-              <Input
-                type={'text'}
-                placeholder={'Логин'}
-                onChange={(e) => setEmail(e.target.value)}
-                icon={'undefined'}
-                value={email}
-                name='login'
-                dispatch={isLoadPatch}
-                // error={false}
-                // ref={inputRef}
-                // onIconClick={onIconClick}
-                // errorText={'Ошибка'}
-              />
-            </div>
-            <div className={`${stylesForm.input} mt-6`}>
-              <Input
-                type={'password'}
-                placeholder={'Пароль'}
-                onChange={(e) => setPassword(e.target.value)}
-                icon={'undefined'}
-                value={password}
-                name='password'
-                dispatch={isLoadPatch}
-                // error={false}
-                // ref={inputRef}
-                // onIconClick={onIconClick}
-                // errorText={'Ошибка'}
-              />
-            </div>
-            <div className={`${styles.btnsForm} mt-6 ${!checkChangedForm() && styles.btnFormHide}`}>
-              <span className={`${styles.cancelBtn} mr-6 text text_type_main-default`} onClick={onClickCancel}>
-                Отменить
-              </span>
-              <Button onSubmit={onSubmit}>Сохранить</Button>
-            </div>
-          </form>
-        </Route>
-        <Route path='/profile/orders' exact>
-          <div className={`${styles.orders} ml-15 pr-2`}>
-            <Link
-              to={{
-                pathname: `/feed/${123}`,
-                state: { background: location },
-              }}>
-              <OrderCard
-                status='Готовится'
-                orderNumber='#034535'
-                name='Death Star Starship Main бургер'
-                ingredients={[
-                  'https://code.s3.yandex.net/react/code/bun-01.png',
-                  'https://code.s3.yandex.net/react/code/bun-01.png',
-                  'https://code.s3.yandex.net/react/code/bun-01.png',
-                  'https://code.s3.yandex.net/react/code/bun-01.png',
-                  'https://code.s3.yandex.net/react/code/bun-01.png',
-                  'https://code.s3.yandex.net/react/code/bun-01.png',
-                  'https://code.s3.yandex.net/react/code/bun-01.png',
-                ]}
-                createdAt='2021-06-23T14:43:22.587Z'
-              />
-            </Link>
-            <OrderCard
-              status='Готовится'
-              orderNumber='#034535'
-              name='Death Star Starship Main бургер'
-              ingredients={[
-                'https://code.s3.yandex.net/react/code/bun-01.png',
-                'https://code.s3.yandex.net/react/code/bun-01.png',
-                'https://code.s3.yandex.net/react/code/bun-01.png',
-                'https://code.s3.yandex.net/react/code/bun-01.png',
-                'https://code.s3.yandex.net/react/code/bun-01.png',
-                'https://code.s3.yandex.net/react/code/bun-01.png',
-                'https://code.s3.yandex.net/react/code/bun-01.png',
-              ]}
-              createdAt='2021-06-23T14:43:22.587Z'
-            />
-            <OrderCard
-              status='Готовится'
-              orderNumber='#034535'
-              name='Death Star Starship Main бургер'
-              ingredients={[
-                'https://code.s3.yandex.net/react/code/bun-01.png',
-                'https://code.s3.yandex.net/react/code/bun-01.png',
-                'https://code.s3.yandex.net/react/code/bun-01.png',
-                'https://code.s3.yandex.net/react/code/bun-01.png',
-                'https://code.s3.yandex.net/react/code/bun-01.png',
-                'https://code.s3.yandex.net/react/code/bun-01.png',
-                'https://code.s3.yandex.net/react/code/bun-01.png',
-              ]}
-              createdAt='2021-06-23T14:43:22.587Z'
-            />
-            <OrderCard
-              status='Готовится'
-              orderNumber='#034535'
-              name='Death Star Starship Main бургер'
-              ingredients={[
-                'https://code.s3.yandex.net/react/code/bun-01.png',
-                'https://code.s3.yandex.net/react/code/bun-01.png',
-                'https://code.s3.yandex.net/react/code/bun-01.png',
-                'https://code.s3.yandex.net/react/code/bun-01.png',
-                'https://code.s3.yandex.net/react/code/bun-01.png',
-                'https://code.s3.yandex.net/react/code/bun-01.png',
-                'https://code.s3.yandex.net/react/code/bun-01.png',
-              ]}
-              createdAt='2021-06-23T14:43:22.587Z'
-            />
-            <OrderCard
-              status='Готовится'
-              orderNumber='#034535'
-              name='Death Star Starship Main бургер'
-              ingredients={[
-                'https://code.s3.yandex.net/react/code/bun-01.png',
-                'https://code.s3.yandex.net/react/code/bun-01.png',
-                'https://code.s3.yandex.net/react/code/bun-01.png',
-                'https://code.s3.yandex.net/react/code/bun-01.png',
-                'https://code.s3.yandex.net/react/code/bun-01.png',
-                'https://code.s3.yandex.net/react/code/bun-01.png',
-                'https://code.s3.yandex.net/react/code/bun-01.png',
-              ]}
-              createdAt='2021-06-23T14:43:22.587Z'
-            />
-          </div>
-        </Route>
-      </Switch>
-    </section>
+          <Switch>
+            <Route path='/profile' exact>
+              <form className={`${styles.box} ml-15`} onSubmit={onSubmit}>
+                <div className={`${stylesForm.input}`}>
+                  <Input
+                    type={'text'}
+                    placeholder={'Имя'}
+                    onChange={(e) => setName(e.target.value)}
+                    icon={'undefined'}
+                    value={name}
+                    name='name'
+                    dispatch={isLoadPatch}
+                    // error={false}
+                    // ref={inputRef}
+                    // onIconClick={onIconClick}
+                    // errorText={'Ошибка'}
+                  />
+                </div>
+                <div className={`${stylesForm.input} mt-6`}>
+                  <Input
+                    type={'text'}
+                    placeholder={'Логин'}
+                    onChange={(e) => setEmail(e.target.value)}
+                    icon={'undefined'}
+                    value={email}
+                    name='login'
+                    dispatch={isLoadPatch}
+                    // error={false}
+                    // ref={inputRef}
+                    // onIconClick={onIconClick}
+                    // errorText={'Ошибка'}
+                  />
+                </div>
+                <div className={`${stylesForm.input} mt-6`}>
+                  <Input
+                    type={'password'}
+                    placeholder={'Пароль'}
+                    onChange={(e) => setPassword(e.target.value)}
+                    icon={'undefined'}
+                    value={password}
+                    name='password'
+                    dispatch={isLoadPatch}
+                    // error={false}
+                    // ref={inputRef}
+                    // onIconClick={onIconClick}
+                    // errorText={'Ошибка'}
+                  />
+                </div>
+                <div className={`${styles.btnsForm} mt-6 ${!checkChangedForm() && styles.btnFormHide}`}>
+                  <span className={`${styles.cancelBtn} mr-6 text text_type_main-default`} onClick={onClickCancel}>
+                    Отменить
+                  </span>
+                  <Button onSubmit={onSubmit}>Сохранить</Button>
+                </div>
+              </form>
+            </Route>
+            <Route path='/profile/orders' exact>
+              <div className={`${styles.orders} ml-15 pr-2`}>
+                {orders.length > 0 &&
+                  orders.map(({ id, name, number, ingredients, createdAt }) => (
+                    <Link
+                      key={id}
+                      to={{
+                        pathname: `/profile/orders/${id}`,
+                        state: { background: location },
+                      }}>
+                      <OrderCard
+                        orderNumber={number}
+                        name={name}
+                        ingredients={ingredients.map((id) => images[id])}
+                        createdAt={createdAt}
+                        price={getPriceOrder(ingredients)}
+                      />
+                    </Link>
+                  ))}
+              </div>
+            </Route>
+          </Switch>
+        </main>
+      </Route>
+    </Switch>
   )
 }
