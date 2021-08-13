@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getIngredients, setCurrentIngredient } from '../../services/actions'
+import { getIngredients, setCurrentIngredient } from '../../services/redux/actions'
 import { useParams } from 'react-router-dom'
 import IngredientDetails from '../../components/IngredientDetails'
 

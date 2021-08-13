@@ -4,7 +4,7 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 
 import styles from './BurgerIngredients.module.css'
 import IngredientsCard from '../IngredientsCard'
-import { getIngredients, setCurrentIngredient, setCurrentIngredients } from '../../services/actions'
+import { setCurrentIngredient, setCurrentIngredients } from '../../services/redux/actions'
 
 export const BurgerIngredients = () => {
   const dispatch = useDispatch()
@@ -40,10 +40,6 @@ export const BurgerIngredients = () => {
       return
     }
   }
-
-  useEffect(() => {
-    dispatch(getIngredients())
-  }, [dispatch])
 
   useEffect(() => {
     buns.length > 0 &&

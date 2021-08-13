@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 
 import styles from '../../utils/styles/forms.module.css'
-import { registration } from '../../services/actions'
+import { registration } from '../../services/redux/actions'
 
 export const RegistrationPage = () => {
   const dispatch = useDispatch()
