@@ -11,7 +11,7 @@ import {
   deleteCurrentIngredients,
   getOrder,
   setCurrentIngredients,
-} from '../../services/actions'
+} from '../../services/redux/actions'
 import { useDrop } from 'react-dnd'
 import DraggableIngredient from '../DraggableIngredient'
 

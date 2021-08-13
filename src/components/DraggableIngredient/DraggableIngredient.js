@@ -4,7 +4,7 @@ import { useDrag, useDrop } from 'react-dnd'
 import { useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { changeCurrentItemIndex } from '../../services/actions'
+import { changeCurrentItemIndex } from '../../services/redux/actions'
 import styles from './DraggableIngredient.module.css'
 
 function areEqual(prevProps, nextProps) {
