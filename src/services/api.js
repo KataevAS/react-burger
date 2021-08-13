@@ -4,6 +4,7 @@ const URL_LOGIN_USER = 'https://norma.nomoreparties.space/api/auth/login'
 const URL_GET_USER = 'https://norma.nomoreparties.space/api/auth/user'
 const URL_REFRESH_TOKEN = 'https://norma.nomoreparties.space/api/auth/token'
 const URL_LOGOUT_USER = 'https://norma.nomoreparties.space/api/auth/logout'
+const URL_GET_ORDERS_ALL = 'https://norma.nomoreparties.space/orders/all'
 
 export const loginRequest = async (form) => {
   return await fetch(URL_LOGIN_USER, {
@@ -67,5 +68,16 @@ export const signOut = async () => {
     },
     referrerPolicy: 'no-referrer',
     body: JSON.stringify({ token: getCookie('refreshToken') }),
+  })
+}
+
+export const getOrdersAll = async () => {
+  return await fetch(URL_GET_ORDERS_ALL, {
+    method: 'GET',
+    cache: 'no-cache',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    referrerPolicy: 'no-referrer',
   })
 }
