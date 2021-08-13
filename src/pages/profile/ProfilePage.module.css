@@ -42,3 +42,8 @@
   width: 100%;
   overflow: auto;
 }
+
+.orderInfo {
+  display: flex;
+  justify-content: center;
+}
