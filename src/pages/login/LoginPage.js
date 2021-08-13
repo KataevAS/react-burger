@@ -4,7 +4,7 @@ import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burg
 
 import styles from '../../utils/styles/forms.module.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { getUser, login } from '../../services/actions'
+import { getUser, login } from '../../services/redux/actions'
 
 export const LoginPage = () => {
   const dispatch = useDispatch()

@@ -4,7 +4,7 @@ import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-component
 
 import styles from '../../utils/styles/forms.module.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { setForgotEmail, setInitialResetPassword } from '../../services/actions'
+import { setForgotEmail, setInitialResetPassword } from '../../services/redux/actions'
 
 export const ForgotPasswordPage = () => {
   const dispatch = useDispatch()

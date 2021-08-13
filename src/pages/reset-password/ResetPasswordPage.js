@@ -4,7 +4,7 @@ import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-component
 
 import styles from '../../utils/styles/forms.module.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { resetPassword } from '../../services/actions'
+import { resetPassword } from '../../services/redux/actions'
 
 export const ResetPasswordPage = () => {
   const dispatch = useDispatch()
