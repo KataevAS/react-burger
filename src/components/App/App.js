@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
-import { Provider, useDispatch } from 'react-redux'
+import { Provider, useDispatch, useSelector } from 'react-redux'
 import { BrowserRouter as Router, Route, Switch, useLocation, useHistory } from 'react-router-dom'
 
 import AppHeader from '../AppHeader'
@@ -18,7 +18,7 @@ import IngredientDetails from '../IngredientDetails'
 import Modal from '../Modal'
 import OrderInfo from '../OrderInfo'
 import { initStore } from '../../services/redux/store'
-import { getIngredients, wsConnect, wsConnectionClosed } from '../../services/redux/actions'
+import { getIngredients, getUser, wsConnect, wsConnectionClosed } from '../../services/redux/actions'
 
 export const App = () => {
   return (
@@ -37,11 +37,19 @@ const AppWrapper = () => {
   const history = useHistory()
   const dispatch = useDispatch()
 
+  const { isAuth } = useSelector((store) => store.user.isAuth)
+
   let background
 
   if (history.action === 'PUSH') {
     background = location.state && location.state.background
   }
+
+  useEffect(() => {
+    if (!isAuth) {
+      dispatch(getUser())
+    }
+  }, [dispatch, isAuth])
 
   useEffect(() => {
     dispatch(wsConnect())
