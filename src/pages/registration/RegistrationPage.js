@@ -68,7 +68,7 @@ export const RegistrationPage = () => {
         <PasswordInput name='password' onChange={onChange} value={userForm.password} />
       </div>
       <div className={`mt-6`}>
-        <Button onSubmit={onSubmit}>Зарегистрироваться</Button>
+        <Button>Зарегистрироваться</Button>
       </div>
       <p className='text text_type_main-default text_color_inactive mt-20'>
         Уже зарегистрированы?{' '}
