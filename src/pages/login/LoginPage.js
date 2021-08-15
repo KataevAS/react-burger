@@ -54,7 +54,7 @@ export const LoginPage = () => {
         <PasswordInput onChange={onChange} name='password' value={userForm.password} />
       </div>
       <div className={`mt-6`}>
-        <Button onSubmit={onSubmit}>Войти</Button>
+        <Button>Войти</Button>
       </div>
       <p className='text text_type_main-default text_color_inactive mt-20'>
         Вы - новый пользователь?{' '}

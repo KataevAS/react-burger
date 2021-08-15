@@ -57,7 +57,7 @@ export const ResetPasswordPage = () => {
         />
       </div>
       <div className={`mt-6`}>
-        <Button onSubmit={onSubmit}>Сохранить</Button>
+        <Button>Сохранить</Button>
       </div>
       <p className='text text_type_main-default text_color_inactive mt-20'>
         Вспомнили пароль?{' '}
