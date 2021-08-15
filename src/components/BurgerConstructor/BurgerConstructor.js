@@ -1,5 +1,5 @@
 import { Button, ConstructorElement, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import React, { useMemo, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import styles from './BurgerConstructor.module.css'
@@ -43,9 +43,9 @@ export const BurgerConstructor = () => {
     dispatch(getOrder([bun.id, bun.id, ...ingredients.map((item) => item.id)]))
   }
 
-  const onHandleClose = (uniqId) => {
+  const onHandleClose = useCallback((uniqId) => {
     dispatch(deleteCurrentIngredients(uniqId))
-  }
+  }, [dispatch])
 
   const [, dropTarget] = useDrop({
     accept: ['ingredient', 'currentIngredient'],
