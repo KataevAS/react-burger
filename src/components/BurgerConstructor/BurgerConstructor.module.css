@@ -33,3 +33,7 @@
 .scrollBox {
   overflow: auto;
 }
+
+.textWithoutIngredients {
+  text-align: center;
+}

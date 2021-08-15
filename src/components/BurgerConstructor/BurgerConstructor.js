@@ -10,10 +10,12 @@ import {
   changeCurrentItemIndex,
   deleteCurrentIngredients,
   getOrder,
+  removeOrder,
   setCurrentIngredients,
 } from '../../services/redux/actions'
 import { useDrop } from 'react-dnd'
 import DraggableIngredient from '../DraggableIngredient'
+import Loader from '../Loader'
 
 export const BurgerConstructor = () => {
   const dispatch = useDispatch()
@@ -33,19 +35,24 @@ export const BurgerConstructor = () => {
 
   const onCloseModal = () => {
     setModalStatus(false)
+    dispatch(removeOrder())
   }
 
   const onOpenModal = () => {
     if (!isAuth) {
       history.push('/login')
+      return
     }
     setModalStatus(true)
     dispatch(getOrder([bun.id, bun.id, ...ingredients.map((item) => item.id)]))
   }
 
-  const onHandleClose = useCallback((uniqId) => {
-    dispatch(deleteCurrentIngredients(uniqId))
-  }, [dispatch])
+  const onHandleClose = useCallback(
+    (uniqId) => {
+      dispatch(deleteCurrentIngredients(uniqId))
+    },
+    [dispatch]
+  )
 
   const [, dropTarget] = useDrop({
     accept: ['ingredient', 'currentIngredient'],
@@ -93,17 +100,18 @@ export const BurgerConstructor = () => {
 
   return (
     <>
-      {modalStatus && order && (
-        <Modal onHandleClose={onCloseModal}>
-          <OrderDetails order={order} />
-        </Modal>
-      )}
+      {modalStatus && <Modal onHandleClose={onCloseModal}>{order ? <OrderDetails order={order} /> : <Loader />}</Modal>}
       <section className={`${styles.box} ml-10 pl-4 pr-4`} ref={dropTarget}>
         {(bun || ingredients) && (
           <>
             <div
               className={`${styles.constructor} mt-25`}
               style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              {!bun && !ingredients.length && (
+                <p className={`${styles.textWithoutIngredients} text text_type_main-large mt-20`}>
+                  Перенесите сюда ингредиенты, чтобы собрать заказ
+                </p>
+              )}
               {bun && renderBunTop}
               <div className={`${styles.scrollBox} pr-2`}>
                 <ul style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
