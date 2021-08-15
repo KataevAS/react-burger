@@ -1,5 +1,6 @@
 import React from 'react'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import PropTypes from 'prop-types'
 import { formatDate } from '../../utils/functions/formatDate'
 import styles from './OrderCard.module.css'
 
@@ -41,3 +42,12 @@ export const OrderCard = React.memo(({ orderNumber, name, ingredients, createdAt
     </div>
   )
 })
+
+OrderCard.propTypes = {
+  orderNumber: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  ingredients: PropTypes.arrayOf(PropTypes.string).isRequired,
+  createdAt: PropTypes.string.isRequired,
+  status: PropTypes.string,
+  price: PropTypes.number.isRequired,
+}
