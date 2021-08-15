@@ -7,6 +7,8 @@ import {
   SET_ORDER_SUCCESS,
   SET_ORDER_REQUEST,
   SET_ORDER_ERROR,
+  REMOVE_ORDER,
+  REMOVE_ALL_CURRENT_INGREDIENTS,
 } from '../action-types'
 
 const initialState = {
@@ -31,6 +33,13 @@ export const currentIngredientsReducer = (state = initialState, action) => {
         }
       }
 
+    case REMOVE_ALL_CURRENT_INGREDIENTS:
+      return {
+        ...state,
+        bun: initialState.bun,
+        all: initialState.all,
+      }
+
     case DELETE_CURRENT_INGREDIENTS:
       return {
         ...state,
@@ -50,6 +59,12 @@ export const currentIngredientsReducer = (state = initialState, action) => {
       }
 
     case SET_ORDER_ERROR:
+      return {
+        ...state,
+        order: initialState.order,
+      }
+
+    case REMOVE_ORDER:
       return {
         ...state,
         order: initialState.order,

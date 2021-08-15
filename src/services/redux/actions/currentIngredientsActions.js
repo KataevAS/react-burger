@@ -6,6 +6,8 @@ import {
   SET_ORDER_SUCCESS,
   SET_ORDER_REQUEST,
   SET_ORDER_ERROR,
+  REMOVE_ORDER,
+  REMOVE_ALL_CURRENT_INGREDIENTS,
 } from '../action-types'
 
 const URL_GET_ORDER = 'https://norma.nomoreparties.space/api/orders'
@@ -28,6 +30,12 @@ export const deleteCurrentIngredients = (uniqId) => (dispatch) => {
   })
 }
 
+export const removeAllCurrentIngredients = () => (dispatch) => {
+  dispatch({
+    type: REMOVE_ALL_CURRENT_INGREDIENTS,
+  })
+}
+
 export const changeCurrentItemIndex =
   ({ id, index }) =>
   (dispatch) => {
@@ -38,28 +46,29 @@ export const changeCurrentItemIndex =
     })
   }
 
-export const getOrder = (ingredients) => (dispatch) => {
-  const getOrderData = async () => {
-    try {
-      const res = await fetch(URL_GET_ORDER, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8',
-          Authorization: 'Bearer ' + getCookie('token'),
-        },
-        body: JSON.stringify({ ingredients }),
-      })
-      if (!res.ok) {
-        dispatch({ type: SET_ORDER_REQUEST })
-        throw new Error('Ошибка HTTP: ' + res.status)
-      }
-      const data = await res.json()
-
-      dispatch({ type: SET_ORDER_SUCCESS, order: data.order.number })
-    } catch (error) {
-      console.log('Возникла проблема с fetch запросом: ', error.message)
-      dispatch({ type: SET_ORDER_ERROR })
+export const getOrder = (ingredients) => async (dispatch) => {
+  try {
+    const res = await fetch(URL_GET_ORDER, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: 'Bearer ' + getCookie('token'),
+      },
+      body: JSON.stringify({ ingredients }),
+    })
+    if (!res.ok) {
+      dispatch({ type: SET_ORDER_REQUEST })
+      throw new Error('Ошибка HTTP: ' + res.status)
     }
+    const data = await res.json()
+    dispatch({ type: REMOVE_ALL_CURRENT_INGREDIENTS })
+    dispatch({ type: SET_ORDER_SUCCESS, order: data.order.number })
+  } catch (error) {
+    console.log('Возникла проблема с fetch запросом: ', error.message)
+    dispatch({ type: SET_ORDER_ERROR })
   }
-  getOrderData()
+}
+
+export const removeOrder = () => (dispatch) => {
+  dispatch({ type: REMOVE_ORDER })
 }
