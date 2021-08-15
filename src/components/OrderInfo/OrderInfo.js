@@ -2,10 +2,11 @@ import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components
 import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import { formatDate } from '../../utils/functions/formatDate'
 import styles from './OrderInfo.module.css'
 
-export const OrderInfo = ({ type }) => {
+export const OrderInfo = ({ type = 'modal' }) => {
   const { id } = useParams()
 
   const orders = useSelector((store) => store.onlineOrders.orders)
@@ -101,4 +102,8 @@ export const OrderInfo = ({ type }) => {
       )}
     </article>
   )
+}
+
+OrderInfo.propTypes = {
+  type: PropTypes.string,
 }
