@@ -31,7 +31,7 @@ export const IngredientsCard = React.memo(({ type, index, name, image, price, id
   })
 
   return (
-    <div onClick={() => onIngredientCardClick(type, index)} className={styles.box} ref={dragRef}>
+    <div onClick={() => onIngredientCardClick(type, index)} className={styles.box} ref={dragRef} data-cy={type + index}>
       <Link
         to={{
           pathname: `/ingredients/${id}`,
