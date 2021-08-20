@@ -78,7 +78,7 @@ export const BurgerConstructor = () => {
           isLocked={true}
           text={`${bun.name} (верх)`}
           price={bun.price}
-          thumbnail={bun.image}
+          thumbnail={bun.image}          
         />
       )
     }
@@ -90,7 +90,7 @@ export const BurgerConstructor = () => {
         <ConstructorElement
           type='bottom'
           isLocked={true}
-          text={`${bun.name} (низ)}`}
+          text={`${bun.name} (низ)`}
           price={bun.price}
           thumbnail={bun.image}
         />
@@ -101,7 +101,7 @@ export const BurgerConstructor = () => {
   return (
     <>
       {modalStatus && <Modal onHandleClose={onCloseModal}>{order ? <OrderDetails order={order} /> : <Loader />}</Modal>}
-      <section className={`${styles.box} ml-10 pl-4 pr-4`} ref={dropTarget}>
+      <section className={`${styles.box} ml-10 pl-4 pr-4`} ref={dropTarget} data-cy='constructor'>
         {(bun || ingredients) && (
           <>
             <div
