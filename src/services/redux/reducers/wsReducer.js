@@ -1,6 +1,6 @@
 import { WS_CONNECTION_SUCCESS, WS_CONNECTION_ERROR, WS_CONNECTION_CLOSED, WS_GET_MESSAGE } from '../action-types'
 
-const initialState = {
+export const initialState = {
   wsConnected: false,
   orders: [],
   total: null,
