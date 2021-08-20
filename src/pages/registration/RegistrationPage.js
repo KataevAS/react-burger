@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 
 import styles from '../../utils/styles/forms.module.css'
-import { registration } from '../../services/actions'
+import { registration } from '../../services/redux/actions'
 
 export const RegistrationPage = () => {
   const dispatch = useDispatch()
@@ -68,7 +68,7 @@ export const RegistrationPage = () => {
         <PasswordInput name='password' onChange={onChange} value={userForm.password} />
       </div>
       <div className={`mt-6`}>
-        <Button onSubmit={onSubmit}>Зарегистрироваться</Button>
+        <Button>Зарегистрироваться</Button>
       </div>
       <p className='text text_type_main-default text_color_inactive mt-20'>
         Уже зарегистрированы?{' '}

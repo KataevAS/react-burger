@@ -4,18 +4,8 @@ import { useDrag, useDrop } from 'react-dnd'
 import { useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { changeCurrentItemIndex } from '../../services/actions'
+import { changeCurrentItemIndex } from '../../services/redux/actions'
 import styles from './DraggableIngredient.module.css'
-
-function areEqual(prevProps, nextProps) {
-  return (
-    prevProps.uniqId === nextProps.uniqId &&
-    prevProps.index === nextProps.index &&
-    prevProps.name === nextProps.name &&
-    prevProps.price === nextProps.price &&
-    prevProps.image === nextProps.image
-  )
-}
 
 export const DraggableIngredient = React.memo(({ uniqId, index, name, price, image, onHandleClose }) => {
   const dispatch = useDispatch()
@@ -71,7 +61,7 @@ export const DraggableIngredient = React.memo(({ uniqId, index, name, price, ima
       </li>
     </>
   )
-}, areEqual)
+})
 
 DraggableIngredient.propTypes = {
   uniqId: PropTypes.string.isRequired,

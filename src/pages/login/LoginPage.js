@@ -4,7 +4,7 @@ import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burg
 
 import styles from '../../utils/styles/forms.module.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { getUser, login } from '../../services/actions'
+import { getUser, login } from '../../services/redux/actions'
 
 export const LoginPage = () => {
   const dispatch = useDispatch()
@@ -54,7 +54,7 @@ export const LoginPage = () => {
         <PasswordInput onChange={onChange} name='password' value={userForm.password} />
       </div>
       <div className={`mt-6`}>
-        <Button onSubmit={onSubmit}>Войти</Button>
+        <Button>Войти</Button>
       </div>
       <p className='text text_type_main-default text_color_inactive mt-20'>
         Вы - новый пользователь?{' '}

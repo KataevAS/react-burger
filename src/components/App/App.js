@@ -1,13 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
-import { Provider } from 'react-redux'
-import { applyMiddleware, createStore } from 'redux'
-import { compose } from 'redux'
-import thunk from 'redux-thunk'
+import { Provider, useDispatch, useSelector } from 'react-redux'
 import { BrowserRouter as Router, Route, Switch, useLocation, useHistory } from 'react-router-dom'
 
-import { rootReducer } from '../../services/reducers'
 import AppHeader from '../AppHeader'
 import LoginPage from '../../pages/login/'
 import RegistrationPage from '../../pages/registration/'
@@ -20,20 +16,14 @@ import { ProtectedRoute } from '../ProtectedRoute'
 import HomePage from '../../pages/home'
 import IngredientDetails from '../IngredientDetails'
 import Modal from '../Modal'
-
-const composeEnhancers =
-  typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
-    : compose
-
-const enhancer = composeEnhancers(applyMiddleware(thunk))
-
-const store = createStore(rootReducer, enhancer)
+import OrderInfo from '../OrderInfo'
+import { initStore } from '../../services/redux/store'
+import { getIngredients, getUser, wsConnect, wsConnectionClosed } from '../../services/redux/actions'
 
 export const App = () => {
   return (
     <>
-      <Provider store={store}>
+      <Provider store={initStore()}>
         <Router>
           <AppWrapper />
         </Router>
@@ -45,11 +35,27 @@ export const App = () => {
 const AppWrapper = () => {
   const location = useLocation()
   const history = useHistory()
+  const dispatch = useDispatch()
+
+  const { isAuth } = useSelector((store) => store.user.isAuth)
+
   let background
 
   if (history.action === 'PUSH') {
     background = location.state && location.state.background
   }
+
+  useEffect(() => {
+    if (!isAuth) {
+      dispatch(getUser())
+    }
+  }, [dispatch, isAuth])
+
+  useEffect(() => {
+    dispatch(wsConnect())
+    dispatch(getIngredients())
+    return () => dispatch(wsConnectionClosed())
+  }, [dispatch])
 
   const closeModal = (e) => {
     e.preventDefault()
@@ -77,22 +83,37 @@ const AppWrapper = () => {
         <Route path='/reset-password' exact>
           <ResetPasswordPage />
         </Route>
-        <Route path='/feed' exact>
+        <Route path='/feed/:id?' exact>
           <FeedPage />
         </Route>
         <ProtectedRoute path='/profile'>
           <ProfilePage />
+        </ProtectedRoute>
+        <ProtectedRoute path='/profile'>
+          <OrderInfo type='page' />
         </ProtectedRoute>
         <Route path='/ingredients/:id'>
           <IngredientsPage />
         </Route>
       </Switch>
       {background && (
-        <Route path='/ingredients/:id'>
-          <Modal title={'Детали ингредиента'} onHandleClose={closeModal}>
-            <IngredientDetails />
-          </Modal>
-        </Route>
+        <Switch>
+          <Route path='/ingredients/:id'>
+            <Modal title={'Детали ингредиента'} onHandleClose={closeModal}>
+              <IngredientDetails />
+            </Modal>
+          </Route>
+          <Route path='/feed/:id'>
+            <Modal onHandleClose={closeModal}>
+              <OrderInfo type='modal' />
+            </Modal>
+          </Route>
+          <ProtectedRoute path='/profile/orders/:id'>
+            <Modal onHandleClose={closeModal}>
+              <OrderInfo type='modal' />
+            </Modal>
+          </ProtectedRoute>
+        </Switch>
       )}
     </>
   )

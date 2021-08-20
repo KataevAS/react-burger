@@ -4,7 +4,7 @@ import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-component
 
 import styles from '../../utils/styles/forms.module.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { setForgotEmail, setInitialResetPassword } from '../../services/actions'
+import { setForgotEmail, setInitialResetPassword } from '../../services/redux/actions'
 
 export const ForgotPasswordPage = () => {
   const dispatch = useDispatch()
@@ -55,7 +55,7 @@ export const ForgotPasswordPage = () => {
         />
       </div>
       <div className={`mt-6`}>
-        <Button onSubmit={onSubmit}>Восстановить</Button>
+        <Button>Восстановить</Button>
       </div>
       <p className='text text_type_main-default text_color_inactive mt-20'>
         Вспомнили пароль?{' '}

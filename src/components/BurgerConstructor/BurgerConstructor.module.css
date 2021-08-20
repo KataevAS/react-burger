@@ -34,14 +34,6 @@
   overflow: auto;
 }
 
-.scrollBox::-webkit-scrollbar {
-  width: 8px;
-}
-.scrollBox::-webkit-scrollbar-track {
-  background: #2F2F37; 
-}
-.scrollBox::-webkit-scrollbar-thumb {
-  background-color: #8585AD;
-  border-radius: 20px;  
-  border: 3px; 
+.textWithoutIngredients {
+  text-align: center;
 }

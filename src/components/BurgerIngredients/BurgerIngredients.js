@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 
 import styles from './BurgerIngredients.module.css'
 import IngredientsCard from '../IngredientsCard'
-import { getIngredients, setCurrentIngredient, setCurrentIngredients } from '../../services/actions'
+import { setCurrentIngredient } from '../../services/redux/actions'
 
 export const BurgerIngredients = () => {
   const dispatch = useDispatch()
@@ -40,15 +40,6 @@ export const BurgerIngredients = () => {
       return
     }
   }
-
-  useEffect(() => {
-    dispatch(getIngredients())
-  }, [dispatch])
-
-  useEffect(() => {
-    buns.length > 0 &&
-      dispatch(setCurrentIngredients(buns[0].type, buns[0].price, buns[0]._id, buns[0].name, buns[0].image))
-  }, [dispatch, buns])
 
   const onIngredientCardClick = useCallback(
     (type, index) => {
