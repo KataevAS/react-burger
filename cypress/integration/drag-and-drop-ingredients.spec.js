@@ -2,6 +2,7 @@ describe('drag and drop', () => {
   beforeEach(function () {
     cy.viewport(1440, 900)
     cy.visit('http://localhost:3000')
+    cy.wait(6000)
   })
 
   it('should drag and drop ingredient', () => {
