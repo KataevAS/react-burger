@@ -53,7 +53,7 @@ export const DraggableIngredient = React.memo(({ uniqId, index, name, price, ima
 
   return (
     <>
-      <li className={`${styles.constructorElem} ${isDrag && styles.isDrag}`} ref={ref}>
+      <li className={`${styles.constructorElem} ${isDrag && styles.isDrag}`} ref={ref} data-cy={'conIng' + index}>
         <div className={`${styles.dragIcon}`}>
           <DragIcon type='primary' />
         </div>
