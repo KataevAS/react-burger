@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import styles from './BurgerConstructor.module.css'
 import Modal from '../Modal'
 import OrderDetails from '../OrderDetails'
-import { useDispatch, useSelector as selectorHook, TypedUseSelectorHook } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import {
   changeCurrentItemIndex,
   deleteCurrentIngredients,
@@ -15,9 +15,7 @@ import {
 import { useDrop } from 'react-dnd'
 import DraggableIngredient from '../DraggableIngredient'
 import Loader from '../Loader'
-import { RootState } from '../../services/redux/store'
-
-export const useSelector: TypedUseSelectorHook<RootState> = selectorHook
+import { useSelector } from '../../utils/typedHooks'
 
 interface IDropItem {
   type: string

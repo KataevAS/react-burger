@@ -4,15 +4,13 @@ import { Switch, Route, Link, useLocation } from 'react-router-dom'
 import stylesForm from '../../utils/styles/forms.module.css'
 import styleContainer from '../../utils/styles/container.module.css'
 import styles from './ProfilePage.module.css'
-import { useDispatch, useSelector as selectorHook, TypedUseSelectorHook } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { changeUserData, logout, wsConnectionClosed, wsIsAuthConnect } from '../../services/redux/actions'
 import OrderCard from '../../components/OrderCard'
 import OrderInfo from '../../components/OrderInfo'
-import { RootState } from '../../services/redux/store'
+import { useSelector } from '../../utils/typedHooks'
 
 type ImagesObj = Record<string, string>
-
-export const useSelector: TypedUseSelectorHook<RootState> = selectorHook
 
 export const ProfilePage = () => {
   const location = useLocation()

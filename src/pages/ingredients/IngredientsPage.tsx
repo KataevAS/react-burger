@@ -3,10 +3,8 @@ import { setIngredients, setCurrentIngredient } from '../../services/redux/actio
 import { useParams } from 'react-router-dom'
 import IngredientDetails from '../../components/IngredientDetails'
 import { TIngredient } from '../../services/redux/actions/currentIngredientActions'
-import { useDispatch, useSelector as selectorHook, TypedUseSelectorHook } from 'react-redux'
-import { RootState } from '../../services/redux/store'
-
-export const useSelector: TypedUseSelectorHook<RootState> = selectorHook
+import { useDispatch } from 'react-redux'
+import { useSelector } from '../../utils/typedHooks'
 
 export const IngredientsPage = () => {
   const id = useParams<{ id: string }>().id

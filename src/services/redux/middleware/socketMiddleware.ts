@@ -2,11 +2,11 @@ import { RootState } from './../store'
 import { Middleware } from 'redux'
 
 type TWsActions = {
-  wsInit: string
-  onOpen: string
-  onClose: string
-  onError: string
-  onMessage: string
+  wsInit: 'WS_CONNECTION_START'
+  onOpen: 'WS_CONNECTION_SUCCESS'
+  onClose: 'WS_CONNECTION_CLOSED'
+  onError: 'WS_CONNECTION_ERROR'
+  onMessage: 'WS_GET_MESSAGE'
 }
 
 export const createSocketMiddleware = (wsUrl: string, wsActions: TWsActions) => {

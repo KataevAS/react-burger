@@ -1,12 +1,9 @@
 import React, { FC } from 'react'
-import { useSelector as selectorHook, TypedUseSelectorHook } from 'react-redux'
 import { useDrag } from 'react-dnd'
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './IngredientsCard.module.css'
 import { useLocation, Link } from 'react-router-dom'
-import { RootState } from '../../services/redux/store'
-
-export const useSelector: TypedUseSelectorHook<RootState> = selectorHook
+import { useSelector } from '../../utils/typedHooks'
 
 interface IIngredientsCardProps {
   type: string

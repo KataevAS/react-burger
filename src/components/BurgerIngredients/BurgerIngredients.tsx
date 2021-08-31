@@ -1,12 +1,10 @@
 import React, { useCallback, useRef, useState } from 'react'
-import { useDispatch, useSelector as selectorHook, TypedUseSelectorHook } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './BurgerIngredients.module.css'
 import IngredientsCard from '../IngredientsCard'
 import { setCurrentIngredient } from '../../services/redux/actions'
-import { RootState } from '../../services/redux/store'
-
-export const useSelector: TypedUseSelectorHook<RootState> = selectorHook
+import { useSelector } from '../../utils/typedHooks'
 
 export const BurgerIngredients = () => {
   const dispatch = useDispatch()

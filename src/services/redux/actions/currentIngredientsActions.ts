@@ -1,5 +1,5 @@
 import { TIngredient } from './currentIngredientActions'
-import { Dispatch } from 'redux'
+import { AppThunk } from './../store'
 import { getCookie } from '../../../utils/cookie'
 import {
   SET_CURRENT_INGREDIENTS,
@@ -21,8 +21,6 @@ export type TCurrentIngredientsActions =
   | ISetOrderSuccess
   | ISetOrderError
   | IRemoveOrder
-
-type AppDispatch = Dispatch<TCurrentIngredientsActions>
 
 const URL_GET_ORDER = 'https://norma.nomoreparties.space/api/orders'
 
@@ -69,8 +67,8 @@ interface IRemoveOrder {
   readonly type: typeof REMOVE_ORDER
 }
 
-export const setCurrentIngredients =
-  (itemType: string, price: number, id: string, name: string, image: string) => (dispatch: AppDispatch) => {
+export const setCurrentIngredients: AppThunk =
+  (itemType: string, price: number, id: string, name: string, image: string) => (dispatch) => {
     dispatch({
       type: SET_CURRENT_INGREDIENTS,
       itemType,
@@ -81,22 +79,22 @@ export const setCurrentIngredients =
     })
   }
 
-export const deleteCurrentIngredients = (uniqId: string) => (dispatch: AppDispatch) => {
+export const deleteCurrentIngredients: AppThunk = (uniqId: string) => (dispatch) => {
   dispatch({
     type: DELETE_CURRENT_INGREDIENTS,
     uniqId,
   })
 }
 
-export const removeAllCurrentIngredients = () => (dispatch: AppDispatch) => {
+export const removeAllCurrentIngredients: AppThunk = () => (dispatch) => {
   dispatch({
     type: REMOVE_ALL_CURRENT_INGREDIENTS,
   })
 }
 
-export const changeCurrentItemIndex =
+export const changeCurrentItemIndex: AppThunk =
   ({ id, index }: { id: string; index: number }) =>
-  (dispatch: AppDispatch) => {
+  (dispatch) => {
     dispatch({
       type: CHANGE_CURRENT_ITEM_INDEX,
       id,
@@ -104,7 +102,7 @@ export const changeCurrentItemIndex =
     })
   }
 
-export const getOrder = (ingredients: string[]) => async (dispatch: AppDispatch) => {
+export const getOrder: AppThunk = (ingredients: string[]) => async (dispatch) => {
   try {
     const res = await fetch(URL_GET_ORDER, {
       method: 'POST',
@@ -127,6 +125,6 @@ export const getOrder = (ingredients: string[]) => async (dispatch: AppDispatch)
   }
 }
 
-export const removeOrder = () => (dispatch: AppDispatch) => {
+export const removeOrder: AppThunk = () => (dispatch) => {
   dispatch({ type: REMOVE_ORDER })
 }

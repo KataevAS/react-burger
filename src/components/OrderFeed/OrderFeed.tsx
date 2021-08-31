@@ -2,10 +2,7 @@ import React, { useCallback, useMemo } from 'react'
 import OrderCard from '../OrderCard'
 import styles from './OrderFeed.module.css'
 import { Link, useLocation } from 'react-router-dom'
-import { useSelector as selectorHook, TypedUseSelectorHook } from 'react-redux'
-import { RootState } from '../../services/redux/store'
-
-export const useSelector: TypedUseSelectorHook<RootState> = selectorHook
+import { useSelector } from '../../utils/typedHooks'
 
 interface LooseObject {
   [key: string]: string

@@ -1,14 +1,12 @@
 import React, { useState, SyntheticEvent, ChangeEvent } from 'react'
 import { Link, Redirect, useLocation } from 'react-router-dom'
-import { useDispatch, useSelector as selectorHook, TypedUseSelectorHook } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 
 import styles from '../../utils/styles/forms.module.css'
 import { registration } from '../../services/redux/actions'
 import { ILocationState } from '../../utils/useLocationStateType'
-import { RootState } from '../../services/redux/store'
-
-export const useSelector: TypedUseSelectorHook<RootState> = selectorHook
+import { useSelector } from '../../utils/typedHooks'
 
 export const RegistrationPage = () => {
   const dispatch = useDispatch()

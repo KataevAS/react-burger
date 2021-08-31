@@ -1,11 +1,9 @@
 import { TIngredients } from './currentIngredientsActions'
-import { Dispatch } from 'redux'
+import { AppThunk } from './../store'
 import { SET_INGREDIENTS_SUCCESS, SET_INGREDIENTS_ERROR, SET_INGREDIENTS_REQUEST } from '../action-types'
 import { getIngredients } from '../../api'
 
 export type TIngredientsActions = ISetIngredientsSuccess | ISetIngredientsRequest | ISetIngredientsError
-
-type AppDispatch = Dispatch<TIngredientsActions>
 
 interface ISetIngredientsSuccess {
   readonly type: typeof SET_INGREDIENTS_SUCCESS
@@ -20,7 +18,7 @@ interface ISetIngredientsError {
   readonly type: typeof SET_INGREDIENTS_ERROR
 }
 
-export const setIngredients = () => async (dispatch: AppDispatch) => {
+export const setIngredients: AppThunk = () => async (dispatch) => {
   try {
     const data = await getIngredients()
     if (data.success) {

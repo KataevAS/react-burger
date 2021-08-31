@@ -1,12 +1,9 @@
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import React, { useMemo, FC } from 'react'
-import { useSelector as selectorHook, TypedUseSelectorHook } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { formatDate } from '../../utils/functions/formatDate'
 import styles from './OrderInfo.module.css'
-import { RootState } from '../../services/redux/store'
-
-export const useSelector: TypedUseSelectorHook<RootState> = selectorHook
+import { useSelector } from '../../utils/typedHooks'
 
 interface IOrderInfoProps {
   type: string

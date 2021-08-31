@@ -3,12 +3,10 @@ import { Link, Redirect, useLocation } from 'react-router-dom'
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 
 import styles from '../../utils/styles/forms.module.css'
-import { useDispatch, useSelector as selectorHook, TypedUseSelectorHook } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { getUser, login } from '../../services/redux/actions'
-import { RootState } from '../../services/redux/store'
 import { ILocationState } from '../../utils/useLocationStateType'
-
-export const useSelector: TypedUseSelectorHook<RootState> = selectorHook
+import { useSelector } from '../../utils/typedHooks'
 
 export const LoginPage = () => {
   const dispatch = useDispatch()

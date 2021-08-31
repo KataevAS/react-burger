@@ -3,12 +3,10 @@ import { Link, Redirect, useLocation } from 'react-router-dom'
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 
 import styles from '../../utils/styles/forms.module.css'
-import { useDispatch, useSelector as selectorHook, TypedUseSelectorHook } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setForgotEmail, setInitialResetPassword } from '../../services/redux/actions'
-import { RootState } from '../../services/redux/store'
+import { useSelector } from '../../utils/typedHooks'
 import { ILocationState } from '../../utils/useLocationStateType'
-
-export const useSelector: TypedUseSelectorHook<RootState> = selectorHook
 
 export const ForgotPasswordPage = () => {
   const dispatch = useDispatch()

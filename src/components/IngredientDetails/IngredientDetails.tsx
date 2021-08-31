@@ -1,9 +1,6 @@
 import React from 'react'
 import styles from './IngredientDetails.module.css'
-import { useSelector as selectorHook, TypedUseSelectorHook } from 'react-redux'
-import { RootState } from '../../services/redux/store'
-
-export const useSelector: TypedUseSelectorHook<RootState> = selectorHook
+import { useSelector } from '../../utils/typedHooks'
 
 export const IngredientDetails = () => {
   const ingredient = useSelector((store) => store.currentIngredient.ingredient)

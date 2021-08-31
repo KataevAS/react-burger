@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
-import { Provider, useDispatch as dispatchHook, useSelector as selectorHook, TypedUseSelectorHook } from 'react-redux'
+import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route, Switch, useLocation, useHistory } from 'react-router-dom'
 
 import AppHeader from '../AppHeader'
@@ -19,10 +19,7 @@ import Modal from '../Modal'
 import OrderInfo from '../OrderInfo'
 import { initStore } from '../../services/redux/store'
 import { setIngredients, getUser, wsConnect, wsConnectionClosed } from '../../services/redux/actions'
-import { RootState, AppDispatch, AppThunk } from '../../services/redux/store'
-
-export const useSelector: TypedUseSelectorHook<RootState> = selectorHook
-export const useDispatch = () => dispatchHook<AppDispatch | AppThunk>()
+import { useSelector, useDispatch } from '../../utils/typedHooks'
 
 export const App = () => {
   return (

@@ -1,9 +1,7 @@
+import { AppThunk } from './../store'
 import { SET_CURRENT_INGREDIENT, DELETE_CURRENT_INGREDIENT } from '../action-types'
-import { Dispatch } from 'redux'
 
 export type TCurrentIngredientActions = ISetCurrentIngredient | IDeleteCurrentIngredient
-
-type AppDispatch = Dispatch<TCurrentIngredientActions>
 
 export type TIngredient = {
   _id: string
@@ -29,14 +27,14 @@ export interface IDeleteCurrentIngredient {
   readonly type: typeof DELETE_CURRENT_INGREDIENT
 }
 
-export const setCurrentIngredient = (ingredient: TIngredient) => async (dispatch: AppDispatch) => {
+export const setCurrentIngredient: AppThunk = (ingredient: TIngredient) => async (dispatch) => {
   dispatch({
     type: SET_CURRENT_INGREDIENT,
     ingredient,
   })
 }
 
-export const deleteCurrentIngredient = () => (dispatch: AppDispatch) => {
+export const deleteCurrentIngredient: AppThunk = () => (dispatch) => {
   dispatch({
     type: DELETE_CURRENT_INGREDIENT,
   })

@@ -1,9 +1,6 @@
 import React, { FC } from 'react'
-import { useSelector as selectorHook, TypedUseSelectorHook } from 'react-redux'
 import { Route, Redirect } from 'react-router-dom'
-import { RootState } from '../services/redux/store'
-
-export const useSelector: TypedUseSelectorHook<RootState> = selectorHook
+import { useSelector } from '../utils/typedHooks'
 
 interface IProtectedRoute {
   path: string | undefined

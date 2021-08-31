@@ -1,5 +1,5 @@
 import { TUser } from './../../api'
-import { Dispatch } from 'redux'
+import { AppThunk } from './../store'
 import {
   getUserData,
   loginRequest,
@@ -36,8 +36,6 @@ export type TUserActions =
   | IRemoveUser
   | ISetInitialResetPasswordStatus
   | ISetResetPasswordStatus
-
-type AppDispatch = Dispatch<TUserActions>
 
 interface ISetUser {
   readonly type: typeof SET_USER
@@ -89,7 +87,7 @@ export type TNewUserData = {
 const URL_EMAIL_FORGOT_PASSWORD = 'https://norma.nomoreparties.space/api/password-reset'
 const URL_RESET_PASSWORD = 'https://norma.nomoreparties.space/api/password-reset/reset'
 
-export const registration = (user: IUserRegForm) => async (dispatch: AppDispatch) => {
+export const registration: AppThunk = (user: IUserRegForm) => async (dispatch) => {
   try {
     const data = await registrationUser(user)
     if (!data.success) {
@@ -107,8 +105,8 @@ export const registration = (user: IUserRegForm) => async (dispatch: AppDispatch
   }
 }
 
-export const getUser = () => async (dispatch: AppDispatch) => {
-  try {    
+export const getUser: AppThunk = () => async (dispatch) => {
+  try {
     let data = await getUserData()
     if (data && !data.success) {
       const dataUpd = await refreshToken()
@@ -132,7 +130,7 @@ export const getUser = () => async (dispatch: AppDispatch) => {
   }
 }
 
-export const changeUserData = (userData: TNewUserData) => (dispatch: AppDispatch) => {
+export const changeUserData: AppThunk = (userData: TNewUserData) => (dispatch) => {
   const newUserData: TNewUserData = {}
   userData.name && (newUserData.name = userData.name)
   userData.email && (newUserData.email = userData.email)
@@ -158,7 +156,7 @@ export const changeUserData = (userData: TNewUserData) => (dispatch: AppDispatch
   setData()
 }
 
-export const setForgotEmail = (email: string) => async (dispatch: AppDispatch) => {
+export const setForgotEmail: AppThunk = (email: string) => async (dispatch) => {
   try {
     const res = await fetch(URL_EMAIL_FORGOT_PASSWORD, {
       method: 'POST',
@@ -176,7 +174,7 @@ export const setForgotEmail = (email: string) => async (dispatch: AppDispatch) =
   }
 }
 
-export const resetPassword = (password: string, token: string) => (dispatch: AppDispatch) => {
+export const resetPassword: AppThunk = (password: string, token: string) => (dispatch) => {
   const setData = async () => {
     try {
       const res = await fetch(URL_RESET_PASSWORD, {
@@ -198,11 +196,11 @@ export const resetPassword = (password: string, token: string) => (dispatch: App
   setData()
 }
 
-export const setInitialResetPassword = () => (dispatch: AppDispatch) => {
+export const setInitialResetPassword: AppThunk = () => (dispatch) => {
   dispatch({ type: SET_INITIAL_RESET_PASSWORD_STATUS })
 }
 
-export const login = (form: ILoginForm) => async (dispatch: AppDispatch) => {
+export const login: AppThunk = (form: ILoginForm) => async (dispatch) => {
   try {
     const data = await loginRequest(form)
     if (!data.success) {
@@ -226,7 +224,7 @@ export const login = (form: ILoginForm) => async (dispatch: AppDispatch) => {
   }
 }
 
-export const logout = () => async (dispatch: AppDispatch) => {
+export const logout: AppThunk = () => async (dispatch) => {
   try {
     const data = await signOut()
     if (data.success) {

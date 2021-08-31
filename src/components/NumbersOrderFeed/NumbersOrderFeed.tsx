@@ -1,9 +1,6 @@
 import React from 'react'
 import styles from './NumbersOrderFeed.module.css'
-import { useSelector as selectorHook, TypedUseSelectorHook } from 'react-redux'
-import { RootState } from '../../services/redux/store'
-
-export const useSelector: TypedUseSelectorHook<RootState> = selectorHook
+import { useSelector } from '../../utils/typedHooks'
 
 export const NumbersOrderFeed = () => {
   const onlineOrders = useSelector((store) => store.onlineOrders)
