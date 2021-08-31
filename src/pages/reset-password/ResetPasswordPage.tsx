@@ -1,0 +1,65 @@
+import React, { useState, SyntheticEvent } from 'react'
+import { Link, Redirect } from 'react-router-dom'
+import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
+
+import styles from '../../utils/styles/forms.module.css'
+import { useDispatch, useSelector as selectorHook, TypedUseSelectorHook } from 'react-redux'
+import { resetPassword } from '../../services/redux/actions'
+import { RootState } from '../../services/redux/store'
+
+export const useSelector: TypedUseSelectorHook<RootState> = selectorHook
+
+export const ResetPasswordPage = () => {
+  const dispatch = useDispatch()
+  const { isSentEmail, isResetPassword } = useSelector((store) => ({
+    isSentEmail: store.user.isSentEmail,
+    isResetPassword: store.user.isResetPassword,
+  }))
+
+  const [password, setPassword] = useState('')
+  const [token, setToken] = useState('')
+
+  const onSubmit = (e: SyntheticEvent<EventTarget>) => {
+    e.preventDefault()
+    dispatch(resetPassword(password, token))
+  }
+
+  if (!isSentEmail || isResetPassword) {
+    return <Redirect to='/' />
+  }
+
+  return (
+    <form className={styles.box} onSubmit={onSubmit}>
+      <h1 className='text text_type_main-medium'>Восстановление пароля</h1>
+      <div className={`${styles.input} mt-6`}>
+        <Input
+          type={'password'}
+          placeholder={'Введите новый пароль'}
+          onChange={(e) => setPassword(e.target.value)}
+          icon={'ShowIcon'}
+          value={password}
+          name='password'
+        />
+      </div>
+      <div className={`${styles.input} mt-6`}>
+        <Input
+          type={'text'}
+          placeholder={'Введите код из письма'}
+          onChange={(e) => setToken(e.target.value)}
+          icon={undefined}
+          value={token}
+          name='token'
+        />
+      </div>
+      <div className={`mt-6`}>
+        <Button>Сохранить</Button>
+      </div>
+      <p className='text text_type_main-default text_color_inactive mt-20'>
+        Вспомнили пароль?{' '}
+        <Link to='/login' className={styles.link}>
+          Войти
+        </Link>
+      </p>
+    </form>
+  )
+}
